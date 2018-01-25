@@ -1,0 +1,30 @@
+ManifestFileVersion: 0
+CRC: 1293410912
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e1350225b06696a1ac98f48989b996ba
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c609cbeb77ee9b3b479f464ca3cfceac
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Art/Scences/ScenceOne/Texture/ssdk_oks_classic_wechatmoments.png
+- Assets/Art/Scences/ScenceOne/Texture/ssdk_oks_classic_youdao.png
+- Assets/Art/Scences/ScenceOne/Texture/Materials/ssdk_oks_classic_wechatmoments.mat
+- Assets/Art/Scences/ScenceOne/Texture/ssdk_oks_classic_yixinmoments.png
+- Assets/Art/Scences/ScenceOne/Texture/Materials/ic_launcher.mat
+- Assets/Art/Scences/ScenceOne/Texture/ssdk_oks_classic_yixin.png
+- Assets/Art/Scences/ScenceOne/Texture/ic_launcher.png
+- Assets/Art/Scences/ScenceOne/Texture/ssdk_oks_classic_whatsapp.png
+- Assets/Art/Scences/ScenceOne/Texture/Materials/ssdk_oks_classic_youdao.mat
+Dependencies: []

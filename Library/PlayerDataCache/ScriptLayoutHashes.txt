@@ -1,4 +1,4 @@
-WindowsStandalone
+Android
 1d4e393238066ca09b77427133a97ed4 Assembly-CSharp.dll:.LoadPanel
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TestAssetBundle1
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MsgCenter
@@ -16,6 +16,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 7b848b7feaa524953d09fc1851efa6da UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 c24a21b131bfa67be1162db2cba4b52b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ILoaderManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.AsyncTest
 1d4e393238066ca09b77427133a97ed4 Assembly-CSharp.dll:.AssetBundleTestPanel
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -94,6 +95,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 7b848b7feaa524953d09fc1851efa6da UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 7b848b7feaa524953d09fc1851efa6da UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 c24a21b131bfa67be1162db2cba4b52b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CoroutineTest
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -114,9 +116,16 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ByFile
 1d4e393238066ca09b77427133a97ed4 Assembly-CSharp.dll:.NativeRourcesLoader
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Coroutine_Runner
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TestAssetBundle2
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MessageBox
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ByString
+549c23f9d262304a1b1b15768f3f46c5 Assembly-CSharp.dll:.LuaBehaviour
 e2f405f3c5c25bb19050dfdb03ece662 Assembly-CSharp.dll:.Client
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.HotfixTest2
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CustomLoader
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -138,13 +147,22 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIBehaviour
 1d4e393238066ca09b77427133a97ed4 Assembly-CSharp.dll:.RegisterPanel
+d0a71dff3f58ad66c3ff16e1e5c35c8f Assembly-CSharp.dll:.HotfixTest
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
 1d4e393238066ca09b77427133a97ed4 Assembly-CSharp.dll:.TCPSocket
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.IABLoader
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GenericMethodExample
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:XLuaTest.RawObjectTest
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LuaCallCs
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Helloworld
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:XLuaTest.NoGc
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.InvokeLua
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TestAssetBundle3
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NetManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NPCManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SignatureLoaderTest
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ReImplementInLua
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CSCallLua

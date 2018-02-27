@@ -20,7 +20,8 @@ public class Injection
 }
 
 [LuaCallCSharp]
-public class LuaBehaviour : MonoBehaviour {
+public class LuaBehaviour : MonoBehaviour
+{
     public TextAsset luaScript;
     public Injection[] injections;
 
@@ -37,7 +38,6 @@ public class LuaBehaviour : MonoBehaviour {
     void Awake()
     {
         scriptEnv = luaEnv.NewTable();
-
         LuaTable meta = luaEnv.NewTable();
         meta.Set("__index", luaEnv.Global);
         scriptEnv.SetMetaTable(meta);
@@ -62,18 +62,37 @@ public class LuaBehaviour : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         if (luaStart != null)
         {
             luaStart();
         }
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
+        /*
+        if (Input.GetMouseButton(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//从摄像机发出到点击坐标的射线
+            Debug.Log("rat= " + ray);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                Debug.DrawLine(ray.origin, hitInfo.point);//划出射线，只有在scene视图中才能看到
+                GameObject gameObj = hitInfo.collider.gameObject;
+                Debug.Log("click object name is " + gameObj.name);
+                if (gameObj.tag == "boot")//当射线碰撞目标为boot类型的物品 ，执行拾取操作
+                {
+                    Debug.Log("pick up!");
+                }
+            }
+        }
+        */
+        
         if (luaUpdate != null)
         {
             luaUpdate();
@@ -83,7 +102,9 @@ public class LuaBehaviour : MonoBehaviour {
             luaEnv.Tick();
             LuaBehaviour.lastGCTime = Time.time;
         }
-	}
+
+       
+    }
 
     void OnDestroy()
     {

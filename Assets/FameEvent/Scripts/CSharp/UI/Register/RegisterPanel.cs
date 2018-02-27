@@ -23,14 +23,14 @@ public class RegisterPanel:UIBase
 
     private void LoginBtnClick()
     {
-        Debug.unityLogger.Log("LoginBtn Click");
+       // Debug.unityLogger.Log("LoginBtn Click");
         MsgBase tmpBase = new MsgBase((ushort)UIEventAllen.Login);
         SendMsg(tmpBase);
     }
 
     private void RegisterBtnClick()
     {
-        Debug.unityLogger.Log("RegisterBtn Click");
+       // Debug.unityLogger.Log("RegisterBtn Click");
         MsgBase tmpBase = new MsgBase((ushort)UIEventAllen.Register);
        // SendMsg(tmpBase);
     }

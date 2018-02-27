@@ -23,7 +23,7 @@ public class LoadPanel : UIBase
 
     private void LoginBtnClick()
     {
-        Debug.unityLogger.Log("LoginBtn Click");
+       // Debug.unityLogger.Log("LoginBtn Click");
     }
 
     // Update is called once per frame

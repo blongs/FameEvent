@@ -64,7 +64,7 @@ namespace Tutorial
 
         public double ComplexFunc(Param1 p1, ref int p2, out string p3, Action luafunc, out Action csfunc)
         {
-            Debug.Log("P1 = {x=" + p1.x + ",y=" + p1.y + "},p2 = "+ p2);
+            Debug.Log("P1 = {x=" + p1.x + ",y=" + p1.y + "},p2 = " + p2);
             luafunc();
             p2 = p2 * p1.x;
             p3 = "hello " + p1.y;
@@ -73,6 +73,12 @@ namespace Tutorial
                 Debug.Log("csharp callback invoked!");
             };
             return 1.23;
+        }
+
+        public static double ComplexFunc1(int i,out RaycastHit p3)
+        {
+            p3 = new RaycastHit();
+            return 9.99;
         }
 
         public void TestFunc(int i)
@@ -214,7 +220,10 @@ public class LuaCallCs : MonoBehaviour {
             end)
             print('ComplexFunc ret:', ret, p2, p3, csfunc)
             csfunc()
-
+   
+            local test12,p3= DrivenClass.ComplexFunc1(100,nil);
+            print(test12)
+            print(p3)
            --重载方法调用
            testobj:TestFunc(100)
            testobj:TestFunc('hello')

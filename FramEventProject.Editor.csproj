@@ -143,6 +143,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art\Scences\ScenceOneRecord.txt" />
+    <None Include="Assets\FameEvent\Scripts\XLua\Crash\Crash.lua.txt" />
+    <None Include="Assets\FameEvent\Scripts\XLua\LuaTestScript.lua.txt" />
     <None Include="Assets\ShaderLearn\Chapter5-SimpleShader\Chapter5-SimpleShader.shader" />
     <None Include="Assets\ShaderLearn\Scenes\FirstShader.shader" />
     <None Include="Assets\ShaderLearn\Scenes\SurfaceShader.shader" />
@@ -157,6 +159,7 @@
     <None Include="Assets\XLua\Examples\06_Coroutine\Resources\cs_coroutine.lua.txt" />
     <None Include="Assets\XLua\Examples\07_AsyncTest\Resources\async_test.lua.txt" />
     <None Include="Assets\XLua\Examples\07_AsyncTest\Resources\message_box.lua.txt" />
+    <None Include="Assets\XLua\Gen\link.xml" />
     <None Include="Assets\XLua\Resources\perf\memory.lua.txt" />
     <None Include="Assets\XLua\Resources\perf\profiler.lua.txt" />
     <None Include="Assets\XLua\Resources\tdr\tdr.lua.txt" />

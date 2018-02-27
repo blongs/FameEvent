@@ -1,0 +1,114 @@
+-- Tencent is pleased to support the open source community by making xLua available.
+-- Copyright (C) 2016 THL A29 Limited, a Tencent company. All rights reserved.
+-- Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+-- http://opensource.org/licenses/MIT
+-- Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+BluePrefab = nil
+GreenPrefab = nil
+RedPrefab = nil
+WhitePrefab = nil
+YellowPrefab = nil
+
+Parent = nil
+
+row = 8;
+cloumn =10 
+
+arrayIndex = {}
+
+arrayObj = {}
+
+
+
+
+function awake()
+	print("lua awake...")
+	Parent = CS.UnityEngine.GameObject.Find("Parent").transform
+
+	BluePrefab  = CS.UnityEngine.Resources.Load("Prefabs/BlueSphere")
+	--CS.UnityEngine.GameObject.Instantiate(BluePrefab,Parent)
+
+	GreenPrefab  = CS.UnityEngine.Resources.Load("Prefabs/GreenSphere")
+	--CS.UnityEngine.GameObject.Instantiate(GreenPrefab,Parent)
+
+	RedPrefab  = CS.UnityEngine.Resources.Load("Prefabs/RedSphere")
+	--CS.UnityEngine.GameObject.Instantiate(RedPrefab,Parent)
+
+	WhitePrefab  = CS.UnityEngine.Resources.Load("Prefabs/WhiteSphere")
+	--CS.UnityEngine.GameObject.Instantiate(WhitePrefab,Parent)
+
+	YellowPrefab  = CS.UnityEngine.Resources.Load("Prefabs/YellowSphere")
+	--CS.UnityEngine.GameObject.Instantiate(YellowPrefab,Parent)
+
+
+end
+
+function start()
+	print("lua start...")
+init()
+end
+
+function update()
+	--local r = CS.UnityEngine.Vector3.up * CS.UnityEngine.Time.deltaTime * speed
+	--CS.UnityEngine.GameObject.Find("Cube").transform:Rotate(r* 50);
+	--self.transform:Rotate(r)
+
+	if (CS.UnityEngine.Input:GetMouseButtonDown(0))
+        then
+		    ray = CS.UnityEngine.Camera.main:ScreenPointToRay(CS.UnityEngine.Input.mousePosition)
+			print(ray)
+			--local hitInfo = nil;
+            local result,hitInfo = CS.UnityEngine.Physics.Raycast(ray)
+            if (result)
+            then
+			    print(hitInfo)
+				local gameObj = hitInfo.collider.gameObject
+				print(gameObj)
+            end
+        end
+end
+
+function ondestroy()
+    print("lua destroy")
+end
+
+
+function init()
+ math.randomseed(os.time())
+ math.random(1,10000)
+for i=1,row do
+	arrayIndex[i] = {}
+		 for j = 1,cloumn do
+			 arrayIndex[i][j] =  math.random(1,5)
+		end
+end
+
+for i=1,row do
+arrayObj[i] = {}
+	  for j = 1,cloumn do
+		--print(arrayIndex[i][j])
+		tempGo = nil
+		if(arrayIndex[i][j] == 1)
+		then
+			tempGo = CS.UnityEngine.GameObject.Instantiate(BluePrefab,Parent)
+		elseif(arrayIndex[i][j] == 2)
+		then
+			tempGo = CS.UnityEngine.GameObject.Instantiate(GreenPrefab,Parent)
+		elseif(arrayIndex[i][j] == 3)
+		then
+			tempGo = CS.UnityEngine.GameObject.Instantiate(RedPrefab,Parent)
+		elseif(arrayIndex[i][j] == 4)
+		then
+			tempGo = CS.UnityEngine.GameObject.Instantiate(WhitePrefab,Parent)
+		elseif(arrayIndex[i][j] == 5)
+		then
+			tempGo = CS.UnityEngine.GameObject.Instantiate(YellowPrefab,Parent)
+		end
+		tempGo.transform.localPosition = CS.UnityEngine.Vector3(i,j,10);
+		arrayObj[i][j] = tempGo
+	 end
+end
+
+end
+

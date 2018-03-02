@@ -33,14 +33,13 @@ function update()
 			if(currentObj == nil)
 				then
 				currentObj = hitInfo.collider.gameObject
+				playsphereanimation(currentObj,true)
 				else
 				    nextObj = hitInfo.collider.gameObject
 				end
 			if(currentObj~=nil and nextObj~=nil)
 			then
-				checkchange(currentObj,nextObj)
-				currentObj = nil	
-				nextObj = nil
+				checkchange( )
 			end
 				
         end
@@ -63,16 +62,16 @@ function ondestroy()
 
 end
 
-function checkchange(currenOb,nextOb)
-	local currenti,currentj =  getsphereij(currenOb)
-	local nexti,nextj =  getsphereij(nextOb)
+function checkchange( )
+	local currenti,currentj =  getsphereij(currentObj)
+	local nexti,nextj =  getsphereij(nextObj)
 	if(currenti==nexti)
 	then
 		if(math.abs(currentj-nextj) ==1)
 		then 
-			local oldindex = getsphereindex(currenOb)
-			setsphereindex(currenOb,getsphereindex(nextOb))
-			setsphereindex(nextOb,oldindex)
+			local oldindex = getsphereindex(currentObj)
+			setsphereindex(currentObj,getsphereindex(nextObj))
+			setsphereindex(nextObj,oldindex)
 			flagclear()
 		end
 	end
@@ -81,9 +80,9 @@ function checkchange(currenOb,nextOb)
 	then
 		if(math.abs(currenti-nexti) ==1)
 		then 
-			local oldindex = getsphereindex(currenOb)
-			setsphereindex(currenOb,getsphereindex(nextOb))
-			setsphereindex(nextOb,oldindex)
+			local oldindex = getsphereindex(currentObj)
+			setsphereindex(currentObj,getsphereindex(nextObj))
+			setsphereindex(nextObj,oldindex)
 			flagclear()
 		end
 	end
@@ -159,7 +158,6 @@ function flagclear()
 			end
 		end
 	end
-
 	clear()
 end
 
@@ -180,8 +178,25 @@ function clear()
 	then
 		movesphere()
 		needClear = true
+		if(currentObj~=nil and nextObj~=nil)
+		then
+			playsphereanimation(currentObj,false)
+			playsphereanimation(nextObj,false)
+		end
+		currentObj = nil	
+		nextObj = nil
 	else
 		needClear = false
+		if(currentObj~=nil and nextObj~=nil)
+		then
+			local oldindex = getsphereindex(currentObj)
+			setsphereindex(currentObj,getsphereindex(nextObj))
+			setsphereindex(nextObj,oldindex)
+			playsphereanimation(currentObj,false)
+			playsphereanimation(nextObj,false)
+			currentObj = nil	
+			nextObj = nil
+		end
 	end
 	
 end
@@ -270,6 +285,10 @@ end
 function resetsphereposition(sphere)
 	local x,y = getsphereij(sphere)
 	sphere.transform.localPosition = CS.UnityEngine.Vector3(x,y,10);
+end
+
+function playsphereanimation(sphere,value)
+	sphere:GetComponent("CrashInfo"):PlayAnimation(value);
 end
 
 

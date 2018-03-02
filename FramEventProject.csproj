@@ -94,6 +94,7 @@
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Assetbundle\IABScenceManager.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Assetbundle\ILoaderManager.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Assetbundle\NativeRourcesLoader.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\Crash\CrashInfo.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\FrameTools.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\IPathTools.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Manager\AssetBundleManager.cs" />

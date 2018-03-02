@@ -160,6 +160,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Helloworld
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:XLuaTest.NoGc
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.InvokeLua
+ac5e4f28d3f49943edb8c9121319a117 Assembly-CSharp.dll:.CrashInfo
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TestAssetBundle3
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NetManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NPCManager

@@ -131,6 +131,24 @@ namespace XLua.CSObjectWrap
             
 			    int __gen_param_count = LuaAPI.lua_gettop(L);
 
+              
+                if (__gen_param_count == 1&& translator.Assignable<UnityEngine.Ray>(L, 1)) 
+                {
+                    UnityEngine.Ray ray;translator.Get(L, 1, out ray);
+                    
+                        bool __cl_gen_ret = UnityEngine.Physics.Raycast( ray );
+                        LuaAPI.lua_pushboolean(L, __cl_gen_ret);
+                    return 1;
+                }
+                if(__gen_param_count == 2&& translator.Assignable<UnityEngine.Ray>(L, 1)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2)) 
+                {
+                    UnityEngine.Ray ray;translator.Get(L, 1, out ray);
+                    float maxDistance = (float)LuaAPI.lua_tonumber(L, 2);
+                    
+                        bool __cl_gen_ret = UnityEngine.Physics.Raycast( ray, maxDistance );
+                        LuaAPI.lua_pushboolean(L, __cl_gen_ret);
+                    return 1;
+                }
                 if (__gen_param_count == 1 && translator.Assignable<UnityEngine.Ray>(L, 1))
                 {
                     UnityEngine.Ray ray; translator.Get(L, 1, out ray);
@@ -141,31 +159,19 @@ namespace XLua.CSObjectWrap
                     translator.Push(L, hitInfo);
                     return 2;
                 }
-                if (__gen_param_count == 1&& translator.Assignable<UnityEngine.Ray>(L, 1)) 
+                //UnityEngine.Debug.Log("LuaAPI.lua_type(L, 2) = "+ LuaAPI.lua_type(L, 2));
+                if (__gen_param_count == 2 && translator.Assignable<UnityEngine.Ray>(L, 1) && LuaTypes.LUA_TNIL == LuaAPI.lua_type(L, 2))
                 {
-                    UnityEngine.Ray ray;translator.Get(L, 1, out ray);
-                    
-                        bool __cl_gen_ret = UnityEngine.Physics.Raycast( ray );
-                        LuaAPI.lua_pushboolean(L, __cl_gen_ret);
-                    
-                    
-                    
-                    return 1;
-                }
-                if(__gen_param_count == 2&& translator.Assignable<UnityEngine.Ray>(L, 1)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2)) 
-                {
-                    UnityEngine.Ray ray;translator.Get(L, 1, out ray);
-                    float maxDistance = (float)LuaAPI.lua_tonumber(L, 2);
-                    
-                        bool __cl_gen_ret = UnityEngine.Physics.Raycast( ray, maxDistance );
-                        LuaAPI.lua_pushboolean(L, __cl_gen_ret);
-                    
-                    
-                    
-                    return 1;
+                    UnityEngine.Ray ray; translator.Get(L, 1, out ray);
+                    UnityEngine.RaycastHit hitInfo;
+
+                    bool __cl_gen_ret = UnityEngine.Physics.Raycast(ray, out hitInfo);
+                    LuaAPI.lua_pushboolean(L, __cl_gen_ret);
+                    translator.Push(L, hitInfo);
+                    return 2;
                 }
 
-                if(__gen_param_count == 3&& translator.Assignable<UnityEngine.Ray>(L, 1)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 3)) 
+                if (__gen_param_count == 3&& translator.Assignable<UnityEngine.Ray>(L, 1)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 3)) 
                 {
                     UnityEngine.Ray ray;translator.Get(L, 1, out ray);
                     float maxDistance = (float)LuaAPI.lua_tonumber(L, 2);
@@ -173,9 +179,6 @@ namespace XLua.CSObjectWrap
                     
                         bool __cl_gen_ret = UnityEngine.Physics.Raycast( ray, maxDistance, layerMask );
                         LuaAPI.lua_pushboolean(L, __cl_gen_ret);
-                    
-                    
-                    
                     return 1;
                 }
                 if(__gen_param_count == 2&& translator.Assignable<UnityEngine.Ray>(L, 1)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2)) 
@@ -187,10 +190,6 @@ namespace XLua.CSObjectWrap
                         bool __cl_gen_ret = UnityEngine.Physics.Raycast( ray, out hitInfo, maxDistance );
                         LuaAPI.lua_pushboolean(L, __cl_gen_ret);
                     translator.Push(L, hitInfo);
-                        
-                    
-                    
-                    
                     return 2;
                 }
                 if(__gen_param_count == 3&& translator.Assignable<UnityEngine.Ray>(L, 1)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 3)) 

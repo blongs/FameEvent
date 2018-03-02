@@ -74,6 +74,7 @@ public class LuaBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       // transform.GetChildCount();
         /*
         if (Input.GetMouseButton(0))
         {

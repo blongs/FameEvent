@@ -4,111 +4,272 @@
 -- http://opensource.org/licenses/MIT
 -- Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
-BluePrefab = nil
-GreenPrefab = nil
-RedPrefab = nil
-WhitePrefab = nil
-YellowPrefab = nil
-
+Prefab = nil
 Parent = nil
-
-row = 8;
+row = 8
 cloumn =10 
-
-arrayIndex = {}
-
 arrayObj = {}
+currentObj = nil
+nextObj = nil
 
-
-
+needClear = true
 
 function awake()
-	print("lua awake...")
 	Parent = CS.UnityEngine.GameObject.Find("Parent").transform
-
-	BluePrefab  = CS.UnityEngine.Resources.Load("Prefabs/BlueSphere")
-	--CS.UnityEngine.GameObject.Instantiate(BluePrefab,Parent)
-
-	GreenPrefab  = CS.UnityEngine.Resources.Load("Prefabs/GreenSphere")
-	--CS.UnityEngine.GameObject.Instantiate(GreenPrefab,Parent)
-
-	RedPrefab  = CS.UnityEngine.Resources.Load("Prefabs/RedSphere")
-	--CS.UnityEngine.GameObject.Instantiate(RedPrefab,Parent)
-
-	WhitePrefab  = CS.UnityEngine.Resources.Load("Prefabs/WhiteSphere")
-	--CS.UnityEngine.GameObject.Instantiate(WhitePrefab,Parent)
-
-	YellowPrefab  = CS.UnityEngine.Resources.Load("Prefabs/YellowSphere")
-	--CS.UnityEngine.GameObject.Instantiate(YellowPrefab,Parent)
-
-
+	Prefab  = CS.UnityEngine.Resources.Load("Prefabs/Sphere")
 end
 
 function start()
-	print("lua start...")
-init()
+	init()
 end
 
 function update()
-	--local r = CS.UnityEngine.Vector3.up * CS.UnityEngine.Time.deltaTime * speed
-	--CS.UnityEngine.GameObject.Find("Cube").transform:Rotate(r* 50);
-	--self.transform:Rotate(r)
-
 	if (CS.UnityEngine.Input:GetMouseButtonDown(0))
+    then
+		ray = CS.UnityEngine.Camera.main:ScreenPointToRay(CS.UnityEngine.Input.mousePosition)
+        local result,hitInfo = CS.UnityEngine.Physics.Raycast(ray,nil)
+        if (result)
         then
-		    ray = CS.UnityEngine.Camera.main:ScreenPointToRay(CS.UnityEngine.Input.mousePosition)
-			print(ray)
-			--local hitInfo = nil;
-            local result,hitInfo = CS.UnityEngine.Physics.Raycast(ray)
-            if (result)
-            then
-			    print(hitInfo)
-				local gameObj = hitInfo.collider.gameObject
-				print(gameObj)
-            end
+			if(currentObj == nil)
+				then
+				currentObj = hitInfo.collider.gameObject
+				else
+				    nextObj = hitInfo.collider.gameObject
+				end
+			if(currentObj~=nil and nextObj~=nil)
+			then
+				checkchange(currentObj,nextObj)
+				currentObj = nil	
+				nextObj = nil
+			end
+				
         end
+    end
+
+	if(CS.UnityEngine.Input:GetMouseButtonDown(1))
+	then
+		--flagclear()
+	end
+
+	if(needClear)
+	then
+		flagclear()
+	end
+
+	
 end
 
 function ondestroy()
-    print("lua destroy")
+
 end
 
+function checkchange(currenOb,nextOb)
+	local currenti,currentj =  getsphereij(currenOb)
+	local nexti,nextj =  getsphereij(nextOb)
+	if(currenti==nexti)
+	then
+		if(math.abs(currentj-nextj) ==1)
+		then 
+			local oldindex = getsphereindex(currenOb)
+			setsphereindex(currenOb,getsphereindex(nextOb))
+			setsphereindex(nextOb,oldindex)
+			flagclear()
+		end
+	end
+
+	if(currentj==nextj)
+	then
+		if(math.abs(currenti-nexti) ==1)
+		then 
+			local oldindex = getsphereindex(currenOb)
+			setsphereindex(currenOb,getsphereindex(nextOb))
+			setsphereindex(nextOb,oldindex)
+			flagclear()
+		end
+	end
+end
+
+function flagclear()
+	--print('flagclear...')
+	for i = 1,row do
+		local tempindex = 0
+		local count = 1
+		local currentindex = 0
+		tempindex =getsphereindex(arrayObj[i][1])
+		for j = 2,cloumn-1 do
+			currentindex = getsphereindex(arrayObj[i][j])
+			if(tempindex == currentindex)
+			then 
+				count = count + 1
+				tempindex = currentindex
+			else
+				if(count>=3)
+				then
+					for n =j - count,j-1 do
+						setdelete(arrayObj[i][n],0)
+					end
+				end
+				count = 1
+				tempindex = currentindex
+			end
+		end
+		currentindex = getsphereindex(arrayObj[i][cloumn])
+		if(tempindex == currentindex)
+		then 
+			count = count + 1
+		end
+		if(count>=3)
+		then
+			for n =cloumn - count + 1,cloumn do
+				setdelete(arrayObj[i][n],0)
+			end
+		end
+	end
+	for i = 1,cloumn do
+		local tempindex = 0
+		local count = 1
+		local currentindex = 0
+		tempindex =getsphereindex(arrayObj[1][i])
+		for j = 2,row - 1 do
+			currentindex = getsphereindex(arrayObj[j][i])
+			if(tempindex == currentindex)
+			then 
+				count = count + 1
+				tempindex = currentindex
+			else
+				if(count>=3)
+				then
+					for n =j - count,j-1 do
+						setdelete(arrayObj[n][i],0)
+					end
+				end
+				count = 1
+				tempindex = currentindex
+			end
+		end
+		currentindex = getsphereindex(arrayObj[row][i])
+		if(tempindex == currentindex)
+		then 
+			count = count + 1
+		end
+		if(count>=3)
+		then
+			for n =row - count + 1,row do
+				setdelete(arrayObj[n][i],0)
+			end
+		end
+	end
+
+	clear()
+end
+
+
+function clear()
+	local deleteCount = 0
+	for i =1, row do
+		for j =1, cloumn do
+			if(getdelete(arrayObj[i][j])==0)
+			then
+				deleteCount = deleteCount + 1
+				CS.UnityEngine.Object.Destroy(arrayObj[i][j])
+				arrayObj[i][j] = nil
+			end
+		end
+	end
+	if(deleteCount>0)
+	then
+		movesphere()
+		needClear = true
+	else
+		needClear = false
+	end
+	
+end
+
+function movesphere()
+	--print('movesphere...')
+	deta = 0;
+	for i = 1, row do
+		count = 0
+		for j = 1,cloumn do
+			if(arrayObj[i][j] ~= nil)
+			then
+				for m = 1,j do
+					if(arrayObj[i][m] == nil)
+					then
+						arrayObj[i][m] = arrayObj[i][j]
+						setsphereij(arrayObj[i][m],i,m)
+						resetsphereposition(arrayObj[i][m])
+						arrayObj[i][j] = nil
+						break
+					end
+				end
+			end
+		end
+	end
+	addsphere()
+end
+
+
+function addsphere()
+	--print('addsphere...')
+	local addtotle = 0
+	for i = 1, row do
+		for j = 1,cloumn do
+			if(arrayObj[i][j] == nil)
+			then
+				addtotle = addtotle + 1
+				tempGo = CS.UnityEngine.GameObject.Instantiate(Prefab,Parent)
+				setsphereij(tempGo,i,j)
+				resetsphereposition(tempGo)
+				arrayObj[i][j] = tempGo
+			end
+		end
+	end
+	--flagclear()
+end
 
 function init()
- math.randomseed(os.time())
- math.random(1,10000)
-for i=1,row do
-	arrayIndex[i] = {}
-		 for j = 1,cloumn do
-			 arrayIndex[i][j] =  math.random(1,5)
+	for i=1,row do
+	arrayObj[i] = {}
+		for j = 1,cloumn do
+			tempGo = CS.UnityEngine.GameObject.Instantiate(Prefab,Parent)
+			tempGo.transform.localPosition = CS.UnityEngine.Vector3(i,j,10);
+			tempGo:GetComponent("CrashInfo").i = i
+			tempGo:GetComponent("CrashInfo").j = j
+			arrayObj[i][j] = tempGo
 		end
+	end
 end
 
-for i=1,row do
-arrayObj[i] = {}
-	  for j = 1,cloumn do
-		--print(arrayIndex[i][j])
-		tempGo = nil
-		if(arrayIndex[i][j] == 1)
-		then
-			tempGo = CS.UnityEngine.GameObject.Instantiate(BluePrefab,Parent)
-		elseif(arrayIndex[i][j] == 2)
-		then
-			tempGo = CS.UnityEngine.GameObject.Instantiate(GreenPrefab,Parent)
-		elseif(arrayIndex[i][j] == 3)
-		then
-			tempGo = CS.UnityEngine.GameObject.Instantiate(RedPrefab,Parent)
-		elseif(arrayIndex[i][j] == 4)
-		then
-			tempGo = CS.UnityEngine.GameObject.Instantiate(WhitePrefab,Parent)
-		elseif(arrayIndex[i][j] == 5)
-		then
-			tempGo = CS.UnityEngine.GameObject.Instantiate(YellowPrefab,Parent)
-		end
-		tempGo.transform.localPosition = CS.UnityEngine.Vector3(i,j,10);
-		arrayObj[i][j] = tempGo
-	 end
+function getsphereindex(sphere)
+	return sphere:GetComponent("CrashInfo").index
 end
 
+function setsphereindex(sphere,index)
+	sphere:GetComponent("CrashInfo"):SetIndex(index)
 end
+
+function getdelete(sphere)
+	return sphere:GetComponent("CrashInfo").delete
+end
+
+function setdelete(sphere,value)
+	sphere:GetComponent("CrashInfo"):SetDelete(value)
+end
+
+function getsphereij(sphere)
+	return sphere:GetComponent("CrashInfo").i,sphere:GetComponent("CrashInfo").j
+end
+
+function setsphereij(sphere,i,j)
+	 sphere:GetComponent("CrashInfo").i = i
+	 sphere:GetComponent("CrashInfo").j = j
+end
+
+function resetsphereposition(sphere)
+	local x,y = getsphereij(sphere)
+	sphere.transform.localPosition = CS.UnityEngine.Vector3(x,y,10);
+end
+
 

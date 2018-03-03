@@ -26,7 +26,11 @@ public class IPathTools
         string tmpPath = null;
         if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
         {
+#if BUNDLE_PUBLISH
+            tmpPath = Application.persistentDataPath;
+#else
             tmpPath = Application.streamingAssetsPath;
+#endif
         }
         else
         {
@@ -41,6 +45,28 @@ public class IPathTools
         string allPath = GetAppFilePath()+ "/AssetBundle/" + platFolder;
 
         return allPath;
+    }
+
+    public static string DownLoadAssetBundlePath
+    {
+        get
+        {
+            string path = "";
+#if !UNITY_EDITOR
+
+#if UNITY_ANDROID
+            path = string.Format("{0}", Application.persistentDataPath);
+#elif UNITY_IPHONE
+            path = string.Format("{0}", Application.temporaryCachePath);
+#else
+            path = string.Format("{0}", Application.persistentDataPath);
+#endif
+
+#else
+            path = string.Format("{0}", Application.persistentDataPath);
+#endif
+            return path + "/AssetBundle";
+        }
     }
 
     public static string GetWWWAssetBundlePath()

@@ -69,54 +69,57 @@ public class LuaBehaviour : MonoBehaviour
         {
             luaStart();
         }
+        Input.GetKeyDown(KeyCode.A);
     }
 
     // Update is called once per frame
     void Update()
     {
        // transform.GetChildCount();
-        /*
-        if (Input.GetMouseButton(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//从摄像机发出到点击坐标的射线
-            Debug.Log("rat= " + ray);
-            RaycastHit hitInfo;
-            if (Physics.Raycast(ray, out hitInfo))
-            {
-                Debug.DrawLine(ray.origin, hitInfo.point);//划出射线，只有在scene视图中才能看到
-                GameObject gameObj = hitInfo.collider.gameObject;
-                Debug.Log("click object name is " + gameObj.name);
-                if (gameObj.tag == "boot")//当射线碰撞目标为boot类型的物品 ，执行拾取操作
-                {
-                    Debug.Log("pick up!");
-                }
-            }
-        }
-        */
-        
-        if (luaUpdate != null)
-        {
-            luaUpdate();
-        }
-        if (Time.time - LuaBehaviour.lastGCTime > GCInterval)
-        {
-            luaEnv.Tick();
-            LuaBehaviour.lastGCTime = Time.time;
-        }
+       /*
+       if (Input.GetMouseButton(0))
+       {
 
-       
-    }
+           Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//从摄像机发出到点击坐标的射线
+           Debug.Log("rat= " + ray);
+           RaycastHit hitInfo;
+           if (Physics.Raycast(ray, out hitInfo))
+           {
+               Debug.DrawLine(ray.origin, hitInfo.point);//划出射线，只有在scene视图中才能看到
+               GameObject gameObj = hitInfo.collider.gameObject;
+               Debug.Log("click object name is " + gameObj.name);
+               if (gameObj.tag == "boot")//当射线碰撞目标为boot类型的物品 ，执行拾取操作
+               {
+                   Debug.Log("pick up!");
+               }
+           }
+       }
+       */
 
-    void OnDestroy()
-    {
-        if (luaOnDestroy != null)
-        {
-            luaOnDestroy();
-        }
-        luaOnDestroy = null;
-        luaUpdate = null;
-        luaStart = null;
-        scriptEnv.Dispose();
-        injections = null;
-    }
+
+       if (luaUpdate != null)
+       {
+           luaUpdate();
+       }
+       if (Time.time - LuaBehaviour.lastGCTime > GCInterval)
+       {
+           luaEnv.Tick();
+           LuaBehaviour.lastGCTime = Time.time;
+       }
+
+
+   }
+
+   void OnDestroy()
+   {
+       if (luaOnDestroy != null)
+       {
+           luaOnDestroy();
+       }
+       luaOnDestroy = null;
+       luaUpdate = null;
+       luaStart = null;
+       scriptEnv.Dispose();
+       injections = null;
+   }
 }

@@ -19,7 +19,7 @@ public class CrashInfo : MonoBehaviour {
 	void Start ()
     {
         ani = GetComponent<Animation>();
-        index = Random.Range(0,4);
+        index = Random.Range(0,2);
         GetComponent<MeshRenderer>().material = materials[index];
         delete = 1;
     }

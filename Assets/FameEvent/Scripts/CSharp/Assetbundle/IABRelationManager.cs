@@ -27,7 +27,6 @@ public class IABRelationManager
 
     public IABRelationManager()
     {
-        Debug.Log("----IABRelationManager----");
         dependenceBundle = new List<string>();
 
         referBundle = new List<string>();

@@ -49,7 +49,6 @@ public class AssetBundleTestPanel : UIBase
             case (ushort)UIEventAllen.Login:
                 HankAssetResourceBack temp = (HankAssetResourceBack)tmpMsg;
                 Instantiate(temp.value[0]);
-                Debug.Log("12121212");
                 break;
             case (ushort)UIEventAllen.Load:
                

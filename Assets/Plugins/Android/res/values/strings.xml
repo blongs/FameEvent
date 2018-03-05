@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 	<string name="zy_class_name">com.androidplugins.functions.MainActivity</string>  <!-- Java工程的MainActivity路径   add by Allen-->
+	<string name="wx_confirm_install_hint">"安装提示"</string>	
+	<string name="wx_confirm_install">"为保证您的交易安全，需要您安装微信支付助手，才能进行付款。\n\n点击确定，立即安装。"</string>
+	<string name="wx_ensure">"确定"</string>
+	<string name="wx_cancel">"取消"</string>  
+	<string name="app_name">common</string>    
+	<string name="action_settings">Settings</string>
+	<string name="kindly_remind">Kindly remind</string>
+	<string name="customer_qq_title">Service QQ:</string>
+    <string name="customer_phone_title">充值问题，请联系:</string>
+	<string name="invalid_token">Invalid token</string>
+	<string name="pay_info">获取支付信息...</string> 
+    <string name="return_error_data">Return error data</string>
+    <string name="server_connection_exception">Server connection exception</string>
+     <string name="init_tips">初始化...</string>
+    <string name="get_pay_method_failed">Get pay method failed!</string>
+    <string name="pay_system_id_empty">Pay system Id is empty</string>
+    <string name="data_exception">Data exception</string>
+    <string name="encrypt_exception">Encrypt exception</string>
+    <string name="decrypt_exception">Decrypt exception</string>
+   <string name="no_wx">请先安装微信</string>
+   <string name="no_alipay">请安装支付宝</string>
+   <string name="paysuccess">支付成功</string>
+   <string name="payfail">支付失败</string>
+
+</resources>

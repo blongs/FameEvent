@@ -1,0 +1,9 @@
+<!-- ACTIVITIES -->
+
+<!-- PERMISSIONS -->
+
+<!-- META-DATA -->
+<meta-data
+	android:name="com.androidplugins.channelid"
+	android:value="{0000-0000}" >
+</meta-data>

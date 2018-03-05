@@ -1,0 +1,20 @@
+<!-- ACTIVITIES -->
+	
+<!-- META-DATA -->
+<meta-data
+	android:name="com.reyun.KEY"
+	android:value="gamedo" >
+</meta-data>
+
+
+<meta-data
+	android:name="com.reyun.CKEY"
+	android:value="gamedo" >
+</meta-data>
+
+<!-- PERMISSIONS -->
+
+<uses-permission android:name="android.permission.READ_LOGS"/>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+

@@ -11,7 +11,7 @@ public class ILoaderManager : MonoBehaviour
     {
         Instance = this;
         //加载manifest
-        StartCoroutine(IABManifestLoader.Instance.LoadManifest());
+      
 
     }
 

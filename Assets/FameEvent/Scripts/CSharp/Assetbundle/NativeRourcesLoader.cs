@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 
 
@@ -103,7 +104,7 @@ public class NativeResourceCallBackManager
         }
         else
         {
-          
+
         }
     }
 }
@@ -117,26 +118,55 @@ public class NativeRourcesLoader : AssetBase
             case (ushort)AssetEvent.HankResource:
                 {
                     HankAssetResource tmpMsg = (HankAssetResource)recMsg;
-                    GetResources(tmpMsg.scenceName,tmpMsg.bundleName,tmpMsg.resourceName,tmpMsg.isSingle,tmpMsg.backMsgId);
+#if USE_ASSETBUNDLE
+                    GetResources(tmpMsg.scenceName, tmpMsg.bundleName, tmpMsg.resourceName, tmpMsg.isSingle, tmpMsg.backMsgId);
+#else
+                    if (tmpMsg.isSingle)
+                    {
+                        UnityEngine.Object temp = ResourcesManager.Instance.GetSceneResources(tmpMsg.scenceName, tmpMsg.bundleName, tmpMsg.resourceName);
+                        NativeResourceCallBackNode tmpResourceNode = new NativeResourceCallBackNode(tmpMsg.isSingle, tmpMsg.scenceName, tmpMsg.bundleName, tmpMsg.resourceName, tmpMsg.backMsgId, SendToBackMsg, null);
+                        CallBack.AddBundle(tmpMsg.bundleName, tmpResourceNode);
+                        this.ReleaseBack.Changer(tmpMsg.backMsgId, temp);
+                        SendMsg(ReleaseBack);
+                    }
+                    else
+                    {
+                        Debug.LogError("Resource.Load 暂时不需要这个功能");
+                    }
+#endif
                 }
                 break;
 
             case (ushort)AssetEvent.ReleaseSingleObj:
                 {
+                  
                     HankAssetResource tmpMsg = (HankAssetResource)recMsg;
+#if USE_ASSETBUNDLE
                     ILoaderManager.Instance.UnLoadResObj(tmpMsg.scenceName, tmpMsg.bundleName, tmpMsg.resourceName);
+#else
+                    ResourcesManager.Instance.ReleaseSingleSceneObject(tmpMsg.scenceName, tmpMsg.bundleName, tmpMsg.resourceName);
+#endif
                 }
                 break;
             case (ushort)AssetEvent.ReleaseBundleObj:
                 {
                     HankAssetResource tmpMsg = (HankAssetResource)recMsg;
+#if USE_ASSETBUNDLE
                     ILoaderManager.Instance.UnLoadBundleResObj(tmpMsg.scenceName, tmpMsg.bundleName);
+#else
+                    ResourcesManager.Instance.ReleaseSceneTypeObject(tmpMsg.scenceName, tmpMsg.bundleName);
+#endif
                 }
                 break;
             case (ushort)AssetEvent.ReleaseScenceObj:
                 {
+
                     HankAssetResource tmpMsg = (HankAssetResource)recMsg;
+#if USE_ASSETBUNDLE
                     ILoaderManager.Instance.UnLoadAllResObjs(tmpMsg.scenceName);
+#else
+                    ResourcesManager.Instance.ReleaseAllSceneObject(tmpMsg.scenceName);
+#endif
                 }
                 break;
             case (ushort)AssetEvent.ReleaseSingleBundle:
@@ -226,11 +256,15 @@ public class NativeRourcesLoader : AssetBase
         if (progress >= 1)
         {
             CallBack.CallBackResource(bundleName);
-            CallBack.Dispose(bundleName); 
+            CallBack.Dispose(bundleName);
         }
     }
     public void GetResources(string sceneName, string bundleName, string res, bool isSingle, ushort backId)
     {
+#if !USE_ASSETBUNDLE
+       
+#else
+
         if (!ILoaderManager.Instance.IsLoadingAssetBundle(sceneName, bundleName))
         {
             ILoaderManager.Instance.LoadAsset(sceneName, bundleName, LoadProgrecess);
@@ -272,6 +306,7 @@ public class NativeRourcesLoader : AssetBase
                 }
             }
         }
+#endif
     }
 
 }

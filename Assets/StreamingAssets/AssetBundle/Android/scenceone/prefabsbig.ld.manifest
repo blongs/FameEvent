@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3136532572
+CRC: 3887354030
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 254f983f2ef52aeea0b35f64738c8ee3
+    Hash: 006b324b2433490212f2a990920de380
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 80213f4158f08a1bc3c2709c74baefed
+    Hash: d587b8b165c068c75fe54a4edcde9a97
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -17,9 +17,13 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 23
   Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
 - Class: 33
   Script: {instanceID: 0}
 - Class: 43
+  Script: {instanceID: 0}
+- Class: 48
   Script: {instanceID: 0}
 - Class: 65
   Script: {instanceID: 0}
@@ -40,9 +44,8 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/Art/Scences/ScenceOne/PrefabsBig/LoadTest.prefab
-- Assets/Art/Scences/ScenceOne/PrefabsBig/3.prefab
-- Assets/Art/Scences/ScenceOne/PrefabsBig/2.prefab
-- Assets/Art/Scences/ScenceOne/PrefabsBig/1.prefab
-Dependencies:
-- E:/Learn/FramEventProject/Assets/StreamingAssets/AssetBundle/Android/scenceone/texture.ld
+- Assets/Resources/Art/Scences/ScenceOne/PrefabsBig/2.prefab
+- Assets/Resources/Art/Scences/ScenceOne/PrefabsBig/3.prefab
+- Assets/Resources/Art/Scences/ScenceOne/PrefabsBig/1.prefab
+- Assets/Resources/Art/Scences/ScenceOne/PrefabsBig/LoadTest.prefab
+Dependencies: []

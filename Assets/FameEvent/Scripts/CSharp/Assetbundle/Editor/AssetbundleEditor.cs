@@ -8,14 +8,13 @@ using System;
 public class AssetbundleEditor
 {
 
-
     [MenuItem("Tools/MarkAssetBundle")]
     public static void MarkAssetBundle()
     {
         AssetDatabase.RemoveUnusedAssetBundleNames();
         //先删除之前的ab包资源
         ClearDir(IPathTools.GetAssetBundlePath());
-        string path = Application.dataPath + "/Art/Scences";
+        string path = Application.dataPath + "/Resources/"+FrameTools.ResoucesParentPath;
         DirectoryInfo dir = new DirectoryInfo(path);
 
         FileSystemInfo[] fileInfo = dir.GetFileSystemInfos();
@@ -75,6 +74,7 @@ public class AssetbundleEditor
     public static void BuideAssetBundle()
     {
         string outPath = IPathTools.GetAssetBundlePath();// + "/AssetBundle";
+        Debug.LogError("outPath = "+ outPath);
         BuildPipeline.BuildAssetBundles(outPath, 0, EditorUserBuildSettings.activeBuildTarget);
         AssetDatabase.Refresh();
     }

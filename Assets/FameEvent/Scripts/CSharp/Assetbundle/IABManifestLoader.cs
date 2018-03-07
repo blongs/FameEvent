@@ -41,16 +41,18 @@ public class IABManifestLoader
         assetManifest = null;
         manifestLoader = null;
         isLoadFinish = false;
-        manifestPath = IPathTools.GetAssetBundlePath()+"/"+ IPathTools.GetPlatformFolderName();
+        manifestPath = IPathTools.GetWWWAssetBundlePath()+"/"+ IPathTools.GetPlatformFolderName();
     }
 
     public IEnumerator LoadManifest()
     {
+        Debug.LogError("manifestPath = "+ manifestPath);
         WWW manifest = new WWW(manifestPath);
         yield return manifest;
         if (!string.IsNullOrEmpty(manifest.error))
         {
-            //baocuo xin xi 
+            Debug.LogError("manifest.error = " + manifest.error);
+            Debug.LogError("加载ab包配置文件出错");
         }
         else
         {

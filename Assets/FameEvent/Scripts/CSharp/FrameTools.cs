@@ -17,6 +17,7 @@ public enum ManagerId
 }
 public class FrameTools
 {
+    public static string  ResoucesParentPath = "Art/Scences";
     public const int MsgSpan = 3000;
 
 }

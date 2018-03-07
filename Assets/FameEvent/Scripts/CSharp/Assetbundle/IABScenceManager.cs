@@ -26,6 +26,7 @@ public class IABScenceManager
 
     private void ReadConfig(string path)
     {
+        Debug.LogError("path = "+ path);
         FileStream fs = new FileStream(path, FileMode.Open);
 
         StreamReader br = new StreamReader(fs);
@@ -38,10 +39,30 @@ public class IABScenceManager
         {
             string tmpStr = br.ReadLine();
             string[] temArr = tmpStr.Split("".ToCharArray());
+            Debug.LogError("temArr[0] = " + temArr[0]);
+            Debug.LogError("temArr[1] = " + temArr[1]);
             allAsset.Add(temArr[0], temArr[1]);
         }
         br.Close();
         fs.Close();
+    }
+
+    public void LoadConfig(string path)
+    {
+        WWW config = new WWW(path);
+        if (!string.IsNullOrEmpty(config.error))
+        {
+            Debug.LogError("config.error = " + config.error);
+        }
+        else
+        {
+            if (config.progress >= 1.0f)
+            {
+                string tmpStr = config.text;
+                Debug.LogError("tmpStr = "+ tmpStr);
+               // tmpStr.ToLower();
+            }
+        }
     }
 
     public void LoadAsset(string bundleName, LoaderProgrecess progress, LoadAssetBundleCallBack callBack)

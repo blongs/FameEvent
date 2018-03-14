@@ -11,7 +11,7 @@ public class Client : MonoBehaviour
 {
     Socket clientSocket;
 
-    public byte[] buffer = new byte[1024];
+    byte[] buffer = new byte[1024];
 
     void Initail()
     {
@@ -36,10 +36,10 @@ public class Client : MonoBehaviour
     #region recv
     void RecvCallBack(IAsyncResult ar)
     {
+        Debug.LogError("----RecvCallBack----");
         int length = clientSocket.EndReceive(ar);
-        socketBuffer.RecvByte(buffer,length);
-        //string tmpStr = Encoding.Default.GetString(buffer, 0, length);
-        // Debug.Log("tmpStr =" + tmpStr);
+        string tmpStr = Encoding.Default.GetString(buffer, 0, length);
+        Debug.Log("tmpStr =" + tmpStr);
         //  BegainSend(tmpStr);
     }
 
@@ -65,7 +65,6 @@ public class Client : MonoBehaviour
 
     #endregion
 
-    SocketBuffer socketBuffer;
 
     public void RecvMsgOver(byte[] allByte)
     {
@@ -74,14 +73,13 @@ public class Client : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        socketBuffer = new SocketBuffer(6, RecvMsgOver);
         Initail();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             BegainSend("1234");
         }

@@ -8,7 +8,7 @@ public class SocketBuffer
     //定义消息头
     private byte[] headByte;
 
-    private byte headLength = 6;
+    private byte headLength = 8;
 
     //接受到的数据
     private byte[] allRecvData;
@@ -89,7 +89,7 @@ public class SocketBuffer
 
     private void RecvHead(byte[] recvByte, int realLength)
     {
-        //差多少个字节，才能组曾一个头
+        //差多少个字节，才能组成一个头
         int tmpReal = headByte.Length - curRecvLength;
         //现在接收的，和已经接收的总长度
         int tmpLength = curRecvLength + realLength;
@@ -103,8 +103,17 @@ public class SocketBuffer
         {
             Buffer.BlockCopy(recvByte, 0, headByte, curRecvLength, tmpReal);
             curRecvLength += tmpReal;
-
-            //取出四个字节，转化int
+            //string headBytestr = "";
+            /*
+            for (int i = 0; i < headByte.Length; i++)
+            {
+                headBytestr = headBytestr +","+ headByte[i];
+            }
+            */
+           // UnityEngine.Debug.Log("headBytestr = " + headBytestr);
+            //取出四个字节，转化int   取出的字节表示整个消息的长度
+          //  UnityEngine.Debug.Log("BitConverter.ToInt32(headByte,0) = " + BitConverter.ToInt32(headByte, 0));
+            UnityEngine.Debug.Log("headLength = " + headLength);
             allDataLength = BitConverter.ToInt32(headByte,0) + headLength;
             // body+head
             allRecvData = new byte[allDataLength];

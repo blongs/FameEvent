@@ -10,8 +10,8 @@ public class SocketTestPanel : UIBase
     {
         switch (tmpMsg.msgId)
         {
-            case (ushort)(ushort)TCPEvent.TcpRecMsgTest:
-                Debug.Log("TcpRecMsgTest");
+            case (ushort)UIEventAllen.Login:
+                Debug.Log("TcpSendMsgBack");
 
                 break;
         }
@@ -20,7 +20,7 @@ public class SocketTestPanel : UIBase
     private void Awake()
     {
         msgIds = new ushort[] {
-        (ushort)TCPEvent.TcpRecMsgTest,
+        (ushort)UIEventAllen.Login,
         };
         RegistSelf(this, msgIds);
         Test();
@@ -29,19 +29,19 @@ public class SocketTestPanel : UIBase
 
     void Test()
     {
-        string data = "018003";
-        byte[] datas = Encoding.Default.GetBytes(data);
-        //int data = 018003;
-        // byte[] datas = BitConverter.GetBytes(data);
+        //string data = "018003";
+        // byte[] datas = Encoding.Default.GetBytes(data);
+        int data = 999999999;
+        byte[] datas = BitConverter.GetBytes(data);
         string datastr = "";
         for (int i = 0; i < datas.Length; i++)
         {
-            datastr = datastr + "," + datas[i];
+            datastr = datastr + " " + datas[i];
         }
         Debug.Log("datastr = " + datastr);
-        //Debug.Log("BitConverter.ToInt32(headByte,0) = " + BitConverter.ToInt32(datas, 0));
+        Debug.Log("BitConverter.ToInt32(headByte,0) = " + BitConverter.ToInt32(datas, 0));
         Encoding.Default.GetString(datas);
-        Debug.Log("Encoding.Default.GetString(datas)= " + Encoding.Default.GetString(datas));
+        //Debug.Log("Encoding.Default.GetString(datas)= " + Encoding.Default.GetString(datas));
     }
 
 
@@ -63,16 +63,13 @@ public class SocketTestPanel : UIBase
 
     private void TcpSendMsgButtonClick()
     {
-        string content = string.Format("{0:D6}", (ushort)TCPEvent.TcpRecMsgTest) + "asdfasdf";
-        Debug.Log("content = " + content);
-        byte[] data = Encoding.Default.GetBytes(content);
-        string datastr = "";
-        for (int i = 0; i < data.Length; i++)
-        {
-            datastr = datastr + "," + data[i];
-        }
-        Debug.Log("datastr = " + datastr);
-        NetMsgBase ba = new NetMsgBase(data);
+        string body = "body content = asdfasdf";
+        byte[] data = Encoding.Default.GetBytes(body);
+        int bodycount = body.Length;
+        byte[] bodycountbytes = BitConverter.GetBytes(bodycount);
+        byte[] headbackMsgbytes = BitConverter.GetBytes((ushort)UIEventAllen.Login);
+
+        NetMsgBase ba = new NetMsgBase(CombomBinaryArray(bodycountbytes, CombomBinaryArray(headbackMsgbytes, data)));
         TCPMsg msg = new TCPMsg((ushort)TCPEvent.TcpSendMsg, ba);
         SendMsg(msg);
     }
@@ -81,5 +78,20 @@ public class SocketTestPanel : UIBase
     void Update()
     {
 
+    }
+
+
+    private byte[] CombomBinaryArray(byte[] srcArray1, byte[] srcArray2)
+    {
+        //根据要合并的两个数组元素总数新建一个数组
+        byte[] newArray = new byte[srcArray1.Length + srcArray2.Length];
+
+        //把第一个数组复制到新建数组
+        Array.Copy(srcArray1, 0, newArray, 0, srcArray1.Length);
+
+        //把第二个数组复制到新建数组
+        Array.Copy(srcArray2, 0, newArray, srcArray1.Length, srcArray2.Length);
+
+        return newArray;
     }
 }

@@ -7,6 +7,7 @@ public enum TCPEvent
 {
     TcpConnect = ManagerId.NetManager + 1,
     TcpSendMsg,
+    TcpSendMsgBack,
     MaxValue
 }
 

@@ -17,6 +17,7 @@ public class MsgCenter : MonoBase {
         gameObject.AddComponent<UIManager>();
         gameObject.AddComponent<NPCManager>();
         gameObject.AddComponent<AssetBundleManager>();
+        gameObject.AddComponent<NetManager>();
     }
     void Start ()
     {
@@ -60,7 +61,7 @@ public class MsgCenter : MonoBase {
                 break;
 
             case ManagerId.NetManager:
-
+                NetManager.Instance.SendMsg(tmpMsg);
                 break;
             case ManagerId.NPCManager:
                 NPCManager.Instance.SendMsg(tmpMsg);

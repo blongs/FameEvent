@@ -11,7 +11,8 @@ public class NetMsgBase : MsgBase
     public NetMsgBase(byte [] arr)
     {
         buffer = arr;
-        this.msgId = BitConverter.ToUInt16(arr,4);
+        //表示具体消息内容的长度
+        msgId = BitConverter.ToUInt16(arr,4);
     }
 
     public byte[] GetNetBytes()

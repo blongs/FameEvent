@@ -11,9 +11,9 @@ public class NetSocket
 
     public delegate void CallBackNormal(bool sucess, ErrorSocket error, string exception);
 
-  //  public delegate void CallBackSend(bool sucess, ErrorSocket error, string exception);
+    //  public delegate void CallBackSend(bool sucess, ErrorSocket error, string exception);
 
-    public delegate void CallBackRecv(bool sucess, ErrorSocket error, string exception,byte[] byteMessage,string strMessage);
+    public delegate void CallBackRecv(bool sucess, ErrorSocket error, string exception, byte[] byteMessage, string strMessage);
 
     // public delegate void CallBackDisConnect(bool sucess, ErrorSocket error, string exception);
 
@@ -46,15 +46,15 @@ public class NetSocket
 
     private Socket clientSocket;
 
-    private string addressIP;
+    // private string addressIP;
 
-    private ushort port;
+    // private ushort port;
 
     SocketBuffer socketBuffer;
 
     public NetSocket()
     {
-        socketBuffer = new SocketBuffer(6, RecvMsgOver);
+        socketBuffer = new SocketBuffer(8, RecvMsgOver);
         recvBuf = new byte[1024];
     }
     public bool isConnected()
@@ -65,32 +65,32 @@ public class NetSocket
         }
         return false;
     }
-   
+
 
     #region Connect
 
-    public void AsyncConnect(string ip, ushort port,CallBackNormal connectBack,CallBackRecv callBackRecv)
+    public void AsyncConnect(string _ip, ushort _port, CallBackNormal _connectBack, CallBackRecv _callBackRecv)
     {
         errorSocket = ErrorSocket.Sucess;
-        this.callBackConnect = connectBack;
-        this.callBackRecv = callBackRecv;
+        callBackConnect = _connectBack;
+        callBackRecv = _callBackRecv;
 
         if (clientSocket != null && clientSocket.Connected)
         {
             this.callBackConnect(false, ErrorSocket.ConnectError, "connect repeat");
         }
-        else if (clientSocket == null|| !clientSocket.Connected)
+        else if (clientSocket == null || !clientSocket.Connected)
         {
-            clientSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+            clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            IPAddress ipAdress = IPAddress.Parse(ip);
+            IPAddress ipAdress = IPAddress.Parse(_ip);
 
-            IPEndPoint endPoint = new IPEndPoint(ipAdress,port);
+            IPEndPoint endPoint = new IPEndPoint(ipAdress, _port);
 
-            IAsyncResult connect =  clientSocket.BeginConnect(endPoint, ConnectCallBack,clientSocket);
+            IAsyncResult connect = clientSocket.BeginConnect(endPoint, ConnectCallBack, clientSocket);
             if (!WriteDot(connect))
             {
-                connectBack(false,errorSocket,"链接超时");
+                callBackConnect(false, errorSocket, "链接超时");
             }
 
 
@@ -110,12 +110,13 @@ public class NetSocket
             else
             {
                 errorSocket = ErrorSocket.ConnectSucess;
-                this.callBackConnect(false, errorSocket, "sucess");
+                this.callBackConnect(true, errorSocket, "sucess");
+                Recive();
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            this.callBackConnect(false,errorSocket,e.ToString());
+            this.callBackConnect(false, errorSocket, e.ToString());
         }
     }
 
@@ -149,37 +150,36 @@ public class NetSocket
     {
         if (clientSocket != null && clientSocket.Connected)
         {
-          IAsyncResult recv =   clientSocket.BeginReceive(recvBuf,0,recvBuf.Length,SocketFlags.None, ReciveCallBack, clientSocket);
-
+            // IAsyncResult recv = clientSocket.BeginReceive(recvBuf, 0, recvBuf.Length, SocketFlags.None, ReciveCallBack, clientSocket);
+            clientSocket.BeginReceive(recvBuf, 0, recvBuf.Length, SocketFlags.None, ReciveCallBack, clientSocket);
+            /*
             if (!WriteDot(recv))
             {
-                callBackRecv(false,ErrorSocket.RecvUnSucessUnKown,"recive time out",null,"");
+                callBackRecv(false, ErrorSocket.RecvUnSucessUnKown, "recive time out", null, "");
             }
+            */
+
         }
     }
 
-    private void ReciveCallBack(IAsyncResult ar)
+    private void ReciveCallBack(IAsyncResult _ar)
     {
         try
         {
-            clientSocket.EndReceive(ar);
-
             if (!clientSocket.Connected)
             {
-                callBackRecv(false,ErrorSocket.RecvUnSucessUnKown,"链接失败",null,"");
+                callBackRecv(false, ErrorSocket.RecvUnSucessUnKown, "链接失败", null, "");
                 return;
 
             }
-
-            int length = clientSocket.EndReceive(ar);
+            int length = clientSocket.EndReceive(_ar);
             if (length == 0)
             {
                 return;
             }
-            socketBuffer.RecvByte(recvBuf,length);
-
+            socketBuffer.RecvByte(recvBuf, length);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             callBackRecv(false, ErrorSocket.RecvUnSucessUnKown, e.ToString(), null, "");
         }
@@ -191,7 +191,7 @@ public class NetSocket
 
     public void RecvMsgOver(byte[] data)
     {
-        callBackRecv(true, ErrorSocket.Sucess, "", null, "recv back sucess");
+        callBackRecv(true, ErrorSocket.Sucess, "", data, "recv back sucess");
     }
 
 
@@ -206,16 +206,16 @@ public class NetSocket
             int byteSend = clientSocket.EndSend(ar);
             if (byteSend > 0)
             {
-                callBackSend(true,ErrorSocket.SendSucess,"");
+                callBackSend(true, ErrorSocket.SendSucess, "");
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             callBackSend(false, ErrorSocket.SendUnSucessUnKown, e.ToString());
         }
     }
 
-    public void AsynSend(byte[] sendBuffer,CallBackNormal tmpSendBack)
+    public void AsynSend(byte[] sendBuffer, CallBackNormal tmpSendBack)
     {
         errorSocket = ErrorSocket.Sucess;
         this.callBackSend = tmpSendBack;
@@ -229,11 +229,11 @@ public class NetSocket
         }
         else
         {
-            IAsyncResult asySend =  clientSocket.BeginSend(sendBuffer, 0, sendBuffer.Length, SocketFlags.None, SendCallBack, clientSocket);
+            IAsyncResult asySend = clientSocket.BeginSend(sendBuffer, 0, sendBuffer.Length, SocketFlags.None, SendCallBack, clientSocket);
 
             if (!WriteDot(asySend))
             {
-                callBackSend(false,ErrorSocket.SendUnSucessUnKown,"send time out");
+                callBackSend(false, ErrorSocket.SendUnSucessUnKown, "send time out");
 
             }
         }
@@ -250,7 +250,7 @@ public class NetSocket
             clientSocket.EndDisconnect(ar);
             clientSocket.Close();
             clientSocket = null;
-            callBackDisConnect(true,ErrorSocket.DisConnectSucess, "");
+            callBackDisConnect(true, ErrorSocket.DisConnectSucess, "");
         }
         catch (Exception e)
         {
@@ -275,7 +275,7 @@ public class NetSocket
             }
             else
             {
-               IAsyncResult asynDisConnect =  clientSocket.BeginDisconnect(false, DisConnectCallBack, clientSocket);
+                IAsyncResult asynDisConnect = clientSocket.BeginDisconnect(false, DisConnectCallBack, clientSocket);
                 if (!WriteDot(asynDisConnect))
                 {
                     callBackDisConnect(false, ErrorSocket.SendUnSucessUnKown, "Disconnect time out");
@@ -288,5 +288,5 @@ public class NetSocket
 
         }
     }
-#endregion
+    #endregion
 }

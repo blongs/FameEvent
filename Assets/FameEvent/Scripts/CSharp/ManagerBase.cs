@@ -17,7 +17,7 @@ public class EventNode
 }
 public class ManagerBase :MonoBase
 {
-    public Dictionary<ushort, EventNode> eventTree = new Dictionary<ushort, EventNode>();
+    private static Dictionary<ushort, EventNode> eventTree = new Dictionary<ushort, EventNode>();
 
     public void RegistMsg(MonoBase mono,params ushort[] msgs)
     {

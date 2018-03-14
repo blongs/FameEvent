@@ -27,6 +27,7 @@ public class NetWorkToServer
 
     void AsysnCoonectCallBack(bool sucess, NetSocket.ErrorSocket tmpError, string exception)
     {
+        Debug.LogError("---AsysnCoonectCallBack---- sucess = "+ sucess);
         if (sucess)
         {
             sendThread = new Thread(LoopSendMsg);
@@ -46,7 +47,12 @@ public class NetWorkToServer
     }
     void CallBackSend(bool sucess, NetSocket.ErrorSocket tmpError, string exception)
     {
+       // Debug.LogError("---CallBackSend---- sucess = "+ sucess+ ",tmpError = "+ tmpError+ ",exception ="+ exception);
         if (sucess)
+        {
+
+        }
+        else
         {
 
         }
@@ -74,6 +80,7 @@ public class NetWorkToServer
     #region Recive
     void AsysnReciveCallBack(bool sucess, NetSocket.ErrorSocket error, string exception, byte[] byteMessage, string strMessage)
     {
+        Debug.LogError("---AsysnReciveCallBack---- sucess = "+ sucess+ ",exception = "+ exception+ ",strMessage = "+ strMessage);
         if (sucess)
         {
             PutRecvMsgToPool(byteMessage);
@@ -99,6 +106,8 @@ public class NetWorkToServer
                 AnalyseData(tmp);
             }
         }
+        //clientSocket.Recive();
+
     }
 
     void AnalyseData(NetMsgBase msg)

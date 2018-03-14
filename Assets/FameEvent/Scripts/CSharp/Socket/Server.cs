@@ -24,7 +24,7 @@ public class SocketState
         //返回值表示从客户端收到多少数据
         int length = socket.EndReceive(ar);
         string tmpStr = Encoding.Default.GetString(buffer,0,length);
-        Debug.Log("tmpStr ="+ tmpStr);
+        Debug.Log("RecvCallBack  tmpStr =" + tmpStr);
         BegainSend(tmpStr);
     }
 
@@ -44,6 +44,7 @@ public class SocketState
     }
     public void BegainSend(string tmpStr)
     {
+        Debug.Log("BegainSend tmpStr =" + tmpStr);
         byte[] data = Encoding.Default.GetBytes(tmpStr);
         socket.BeginSend(data,0,data.Length,SocketFlags.None, SendCallBack,this);
     }

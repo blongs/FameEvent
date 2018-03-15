@@ -1,0 +1,8 @@
+syntax = "proto3";
+package PKG;
+
+message Login
+{
+	string userName = 1;
+	string passWord = 2;
+}

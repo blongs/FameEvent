@@ -6,6 +6,9 @@ using System.Net.Sockets;
 using System;
 using System.Threading;
 using System.Text;
+using Google.Protobuf;
+using PKG;
+
 
 public class SocketState
 {
@@ -18,20 +21,51 @@ public class SocketState
         socket = tmpSocket;
         buffer = new byte[1024];
     }
-#region recv
+    #region recv
     void RecvCallBack(IAsyncResult ar)
     {
+        /*
+        string strs = "";
+        for (int i = 0; i < buffer.Length; i++)
+        {
+            strs = strs + " " + buffer[i];
+        }
+        Debug.Log("strs= " + strs);
+        */
         //返回值表示从客户端收到多少数据
         int length = socket.EndReceive(ar);
-        string tmpStr = Encoding.Default.GetString(buffer,0,length);
-        Debug.Log("RecvCallBack  tmpStr =" + tmpStr);
-        BegainSend(tmpStr);
+        short count = BitConverter.ToInt16(buffer, 0);
+        /*
+        Debug.Log("count = " + count);
+        byte[] back = new byte[4];
+        Debug.Log("---1---");
+        for (int i = 4; i < 8; i++)
+        {
+
+            back[i - 4] = buffer[i];
+            Debug.Log("back[i - 4] = " + back[i - 4]);
+        }
+        Debug.Log("---2---");
+        short backId = BitConverter.ToInt16(back, 0);
+        Debug.Log("backId = " + backId);
+        */
+        byte[] bodys = new byte[count];
+        for (int i = 6; i < count + 6; i++)
+        {
+            bodys[i - 6] = buffer[i];
+        }
+        IMessage IMLogin = new Login();
+        Login login = new Login();
+        login = (Login)IMLogin.Descriptor.Parser.ParseFrom(bodys);
+        Array.Resize(ref buffer, count + 6);
+        BegainSend(buffer);
+
     }
 
     //处理客户端的数据
     public void BegainRecv()
     {
-        socket.BeginReceive(buffer, 0, 1024, SocketFlags.None, RecvCallBack, this);
+        socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, RecvCallBack, this);
     }
     #endregion
 
@@ -39,18 +73,19 @@ public class SocketState
     void SendCallBack(IAsyncResult ar)
     {
         int byteSend = socket.EndSend(ar);
-        Debug.Log("byteSend ="+ byteSend);
-       
+        Debug.Log("byteSend =" + byteSend);
+
     }
-    public void BegainSend(string tmpStr)
+    public void BegainSend(byte[] data)
     {
-        Debug.Log("BegainSend tmpStr =" + tmpStr);
-        byte[] data = Encoding.Default.GetBytes(tmpStr);
-        socket.BeginSend(data,0,data.Length,SocketFlags.None, SendCallBack,this);
+        Debug.Log("---BegainSend--- ");
+        //Debug.Log("BegainSend tmpStr =" + tmpStr);
+        // byte[] data = Encoding.Default.GetBytes(tmpStr);
+        socket.BeginSend(data, 0, data.Length, SocketFlags.None, SendCallBack, this);
     }
 
 
-#endregion
+    #endregion
 }
 
 public class Server : MonoBehaviour
@@ -58,7 +93,7 @@ public class Server : MonoBehaviour
     private Socket serverSocket;
 
 
-#region accept
+    #region accept
     /// <summary>
     /// 接收客户端的请求数据
     /// </summary>
@@ -69,8 +104,7 @@ public class Server : MonoBehaviour
             try
             {
                 //接收客户端的链接请求
-                //
-                serverSocket.BeginAccept(new AsyncCallback(AsysAcceptCallBack),serverSocket);
+                serverSocket.BeginAccept(new AsyncCallback(AsysAcceptCallBack), serverSocket);
             }
             catch (Exception e)
             {
@@ -87,7 +121,7 @@ public class Server : MonoBehaviour
 
     void AsysAcceptCallBack(IAsyncResult ar)
     {
-        Socket listener =(Socket) ar.AsyncState;
+        Socket listener = (Socket)ar.AsyncState;
         //得到一个连接请求 杜塞德 直到客户端有请求过来
         Socket clientSocket = listener.EndAccept(ar);
         //
@@ -100,7 +134,7 @@ public class Server : MonoBehaviour
     public void InitalSocket()
     {
         //表示和电脑端哪个网卡绑定 IPAddress.Any 表示使用最优的网卡 ，8888表示端口号
-        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any,8888);
+        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 8888);
         //把socket和网卡还有端口号进行绑定
         serverSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 

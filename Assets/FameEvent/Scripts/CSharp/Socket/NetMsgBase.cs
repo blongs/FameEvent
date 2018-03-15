@@ -4,9 +4,12 @@ using UnityEngine;
 using System.IO;
 using System;
 
-
+/// <summary>
+/// buffer的前6个字节表示消息头。 0-4位保存的是int类型的数据，表示消息体的长度。   4-5位保存的是ushort类型的处理消息id。 
+/// </summary>
 public class NetMsgBase : MsgBase
 {
+
     public byte[] buffer;
     public NetMsgBase(byte [] arr)
     {

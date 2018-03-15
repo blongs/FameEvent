@@ -95,8 +95,8 @@ public class ProtoSocketTestPanel : UIBase
     private void TcpLoginMsgButtonClick()
     {
         Login login = new Login();
-        login.UserName = "username";
-        login.PassWord = "password";
+        login.UserName = "usernameusernameusernameusernameusernameusername";
+        login.PassWord = "passwordpasswordpasswordpasswordpasswordpassword";
 
         byte[] bodys = login.ToByteArray();
 

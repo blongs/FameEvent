@@ -8,7 +8,7 @@ public class SocketBuffer
     //定义消息头
     private byte[] headByte;
 
-    private byte headLength = 8;
+    private byte headLength = 6;
 
     //接受到的数据
     private byte[] allRecvData;

@@ -8,6 +8,8 @@ public enum TCPEvent
     TcpConnect = ManagerId.NetManager + 1,
     TcpSendMsg,
     TcpSendMsgBack,
+    TcpSendLoginMsg,
+    TcpBackLoginMsg,
     MaxValue
 }
 
@@ -54,6 +56,12 @@ public class TCPSocket : NetBase
                     socket.PutSendMsgToPool(sendMsg.netMsg);
                 }
                 break;
+            case (ushort)TCPEvent.TcpSendLoginMsg:
+                {
+                    TCPMsg sendMsg = (TCPMsg)tmpMsg;
+                    socket.PutSendMsgToPool(sendMsg.netMsg);
+                }
+                break;
         }
     }
 
@@ -63,6 +71,8 @@ public class TCPSocket : NetBase
             {
                 (ushort) TCPEvent.TcpConnect,
                 (ushort) TCPEvent.TcpSendMsg,
+                (ushort) TCPEvent.TcpSendLoginMsg,
+
 
             };
 

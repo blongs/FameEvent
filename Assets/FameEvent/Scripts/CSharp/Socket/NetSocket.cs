@@ -54,7 +54,7 @@ public class NetSocket
 
     public NetSocket()
     {
-        socketBuffer = new SocketBuffer(8, RecvMsgOver);
+        socketBuffer = new SocketBuffer(6, RecvMsgOver);
         recvBuf = new byte[1024];
     }
     public bool isConnected()

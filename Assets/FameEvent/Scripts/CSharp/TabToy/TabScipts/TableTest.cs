@@ -3,10 +3,10 @@
 // DO NOT EDIT!!
 using System.Collections.Generic;
 
-namespace table
+namespace TableTest
 {
 	
-	// Defined in table: Globals
+	// Defined in table: Sample
 	public enum ActorType
 	{
 		
@@ -35,13 +35,50 @@ namespace table
 	
 		
 		/// <summary> 
+		/// Blongs
+		/// </summary>
+		public List<BlongsDefine> Blongs = new List<BlongsDefine>(); 
+		
+		/// <summary> 
 		/// Sample
 		/// </summary>
 		public List<SampleDefine> Sample = new List<SampleDefine>(); 
 	
 	
 		#region Index code
-	 	Dictionary<long, SampleDefine> _SampleByID = new Dictionary<long, SampleDefine>();
+	 	Dictionary<long, BlongsDefine> _BlongsByNEWID = new Dictionary<long, BlongsDefine>();
+        public BlongsDefine GetBlongsByNEWID(long NEWID, BlongsDefine def = default(BlongsDefine))
+        {
+            BlongsDefine ret;
+            if ( _BlongsByNEWID.TryGetValue( NEWID, out ret ) )
+            {
+                return ret;
+            }
+			
+			if ( def == default(BlongsDefine) )
+			{
+				TableLogger.ErrorLine("GetBlongsByNEWID failed, NEWID: {0}", NEWID);
+			}
+
+            return def;
+        }
+		Dictionary<string, BlongsDefine> _BlongsByNEWName = new Dictionary<string, BlongsDefine>();
+        public BlongsDefine GetBlongsByNEWName(string NEWName, BlongsDefine def = default(BlongsDefine))
+        {
+            BlongsDefine ret;
+            if ( _BlongsByNEWName.TryGetValue( NEWName, out ret ) )
+            {
+                return ret;
+            }
+			
+			if ( def == default(BlongsDefine) )
+			{
+				TableLogger.ErrorLine("GetBlongsByNEWName failed, NEWName: {0}", NEWName);
+			}
+
+            return def;
+        }
+		Dictionary<long, SampleDefine> _SampleByID = new Dictionary<long, SampleDefine>();
         public SampleDefine GetSampleByID(long ID, SampleDefine def = default(SampleDefine))
         {
             SampleDefine ret;
@@ -101,12 +138,28 @@ namespace table
                 { 
                 	case 0xa0000:
                 	{
+						ins.Blongs.Add( reader.ReadStruct<BlongsDefine>(BlongsDefineDeserializeHandler) );
+                	}
+                	break; 
+                	case 0xa0001:
+                	{
 						ins.Sample.Add( reader.ReadStruct<SampleDefine>(SampleDefineDeserializeHandler) );
                 	}
                 	break; 
                 }
              } 
 
+			
+			// Build Blongs Index
+			for( int i = 0;i< ins.Blongs.Count;i++)
+			{
+				var element = ins.Blongs[i];
+				
+				ins._BlongsByNEWID.Add(element.NEWID, element);
+				
+				ins._BlongsByNEWName.Add(element.NEWName, element);
+				
+			}
 			
 			// Build Sample Index
 			for( int i = 0;i< ins.Sample.Count;i++)
@@ -120,20 +173,20 @@ namespace table
 			}
 			
 		}
-		static tabtoy.DeserializeHandler<Vec2> _Vec2DeserializeHandler;
-		static tabtoy.DeserializeHandler<Vec2> Vec2DeserializeHandler
+		static tabtoy.DeserializeHandler<BlongsDefine> _BlongsDefineDeserializeHandler;
+		static tabtoy.DeserializeHandler<BlongsDefine> BlongsDefineDeserializeHandler
 		{
 			get
 			{
-				if (_Vec2DeserializeHandler == null )
+				if (_BlongsDefineDeserializeHandler == null )
 				{
-					_Vec2DeserializeHandler = new tabtoy.DeserializeHandler<Vec2>(Deserialize);
+					_BlongsDefineDeserializeHandler = new tabtoy.DeserializeHandler<BlongsDefine>(Deserialize);
 				}
 
-				return _Vec2DeserializeHandler;
+				return _BlongsDefineDeserializeHandler;
 			}
 		}
-		public static void Deserialize( Vec2 ins, tabtoy.DataReader reader )
+		public static void Deserialize( BlongsDefine ins, tabtoy.DataReader reader )
 		{
 			
  			int tag = -1;
@@ -141,14 +194,29 @@ namespace table
             {
                 switch (tag)
                 { 
-                	case 0x10000:
+                	case 0x20000:
                 	{
-						ins.X = reader.ReadInt32();
+						ins.NEWID = reader.ReadInt64();
                 	}
                 	break; 
-                	case 0x10001:
+                	case 0x60001:
                 	{
-						ins.Y = reader.ReadInt32();
+						ins.NEWName = reader.ReadString();
+                	}
+                	break; 
+                	case 0x10002:
+                	{
+						ins.NEWIconID = reader.ReadInt32();
+                	}
+                	break; 
+                	case 0x50003:
+                	{
+						ins.NEWNumericalRate = reader.ReadFloat();
+                	}
+                	break; 
+                	case 0x10004:
+                	{
+						ins.NEWItemID = reader.ReadInt32();
                 	}
                 	break; 
                 }
@@ -221,6 +289,42 @@ namespace table
                 	case 0x10000:
                 	{
 						ins.Value = reader.ReadInt32();
+                	}
+                	break; 
+                }
+             } 
+
+			
+		}
+		static tabtoy.DeserializeHandler<Vec2> _Vec2DeserializeHandler;
+		static tabtoy.DeserializeHandler<Vec2> Vec2DeserializeHandler
+		{
+			get
+			{
+				if (_Vec2DeserializeHandler == null )
+				{
+					_Vec2DeserializeHandler = new tabtoy.DeserializeHandler<Vec2>(Deserialize);
+				}
+
+				return _Vec2DeserializeHandler;
+			}
+		}
+		public static void Deserialize( Vec2 ins, tabtoy.DataReader reader )
+		{
+			
+ 			int tag = -1;
+            while ( -1 != (tag = reader.ReadTag()))
+            {
+                switch (tag)
+                { 
+                	case 0x10000:
+                	{
+						ins.X = reader.ReadInt32();
+                	}
+                	break; 
+                	case 0x10001:
+                	{
+						ins.Y = reader.ReadInt32();
                 	}
                 	break; 
                 }
@@ -319,17 +423,36 @@ namespace table
 
 	} 
 
-	// Defined in table: Globals
-	
-	public partial class Vec2
+	// Defined in table: Blongs
+	[System.Serializable]
+	public partial class BlongsDefine
 	{
 	
 		
+		/// <summary> 
+		/// 唯一ID
+		/// </summary>
+		public long NEWID = 0; 
 		
-		public int X = 0; 
+		/// <summary> 
+		/// 名称
+		/// </summary>
+		public string NEWName = ""; 
 		
+		/// <summary> 
+		/// 图标ID
+		/// </summary>
+		public int NEWIconID = 0; 
 		
-		public int Y = 0; 
+		/// <summary> 
+		/// 攻击率
+		/// </summary>
+		public float NEWNumericalRate = 0f; 
+		
+		/// <summary> 
+		/// 物品id
+		/// </summary>
+		public int NEWItemID = 100; 
 	
 	
 
@@ -362,6 +485,22 @@ namespace table
 		
 		
 		public int Value = 0; // 攻击值
+	
+	
+
+	} 
+
+	// Defined in table: Sample
+	[System.Serializable]
+	public partial class Vec2
+	{
+	
+		
+		
+		public int X = 0; 
+		
+		
+		public int Y = 0; 
 	
 	
 

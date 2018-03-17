@@ -1,11 +1,24 @@
-: 输出C#源码,二进制(例子中供C#读取), lua表, json格式
-: 适用于csharp, golang, lua例子
-tabtoy.exe ^
---mode=v2 ^
---csharp_out=..\.\Assets\FameEvent\Scripts\CSharp\TabToy\Config.cs ^
---binary_out=..\.\Assets\StreamingAssets\DataBin\Config.bin ^
---lan=zh_cn ^
-.\XLSXS\Globals.xlsx ^
-.\XLSXS\Sample.xlsx
+@echo off
 
+set SOURCE_FOLDER=.\Tables\TableTest\
+
+set CS_TARGET_PATH=..\.\Assets\FameEvent\Scripts\CSharp\TabToy\TabScipts\
+
+set CS_DATABIN_PATH=..\.\Assets\StreamingAssets\DataBin\
+
+rd /s /q %CS_TARGET_PATH%
+rd /s /q %CS_DATABIN_PATH%
+
+echo tabtoy.exe --mode=v2 --csharp_out=%CS_TARGET_PATH%TableTest.cs --binary_out=%CS_DATABIN_PATH%TableTest.bin --lan=zh_cn %SOURCE_FOLDER%Blongs.xlsx %SOURCE_FOLDER%Sample.xlsx
+
+@tabtoy.exe ^
+--mode=v2 ^
+--csharp_out=%CS_TARGET_PATH%TableTest.cs ^
+--binary_out=%CS_DATABIN_PATH%TableTest.bin ^
+--lan=zh_cn ^
+%SOURCE_FOLDER%Blongs.xlsx ^
+%SOURCE_FOLDER%Sample.xlsx
 @IF %ERRORLEVEL% NEQ 0 pause
+
+pause
+

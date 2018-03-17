@@ -3,9 +3,9 @@
 ::协议文件路径, 最后不要跟“\”符号
 set SOURCE_FOLDER=.\Proto
 
-set CS_TARGET_PATH=.\CS
+set CS_TARGET_PATH=..\..\..\.\Assets\FameEvent\Scripts\CSharp\Proto\ProtoScipts
 
-
+rd /s /q %CS_TARGET_PATH%
 
 ::遍历所有文件
 for /f "delims=" %%i in ('dir /b "%SOURCE_FOLDER%\*.proto"') do (

@@ -151,6 +151,10 @@
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Socket\Server.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Socket\SocketBuffer.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Socket\TCPSocket.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\Config.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\DataReader.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\Logger.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\TabToyProgram.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\ThirdSDK\ChannelSDK\AndroidChannelSDKMgr.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\ThirdSDK\ChannelSDK\AndroidMultSDKHelper.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\ThirdSDK\ChannelSDK\AndroidSingleSDKHelper.cs" />

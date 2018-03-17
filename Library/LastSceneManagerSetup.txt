@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/FameEvent/Scene/TestSocket.unity
+- path: Assets/FameEvent/Scene/TestTabToy.unity
   isLoaded: 1
   isActive: 1

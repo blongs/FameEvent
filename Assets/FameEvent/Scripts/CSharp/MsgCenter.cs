@@ -18,6 +18,7 @@ public class MsgCenter : MonoBase {
         gameObject.AddComponent<NPCManager>();
         gameObject.AddComponent<AssetBundleManager>();
         gameObject.AddComponent<NetManager>();
+        gameObject.AddComponent<TabToyManager>();
     }
     void Start ()
     {
@@ -68,6 +69,9 @@ public class MsgCenter : MonoBase {
                 break;
             case ManagerId.UIManader:
                 UIManager.Instance.SendMsg(tmpMsg);
+                break;
+            case ManagerId.TabToyManager:
+                TabToyManager.Instance.SendMsg(tmpMsg);
                 break;
             default:
                 break;

@@ -14,11 +14,13 @@ public enum ManagerId
     CharacterManager = FrameTools.MsgSpan * 4,
     AssetManager = FrameTools.MsgSpan * 5,
     NetManager = FrameTools.MsgSpan * 6,
+    TabToyManager = FrameTools.MsgSpan * 7,
 }
 public class FrameTools
 {
     public static string  ResoucesParentPath = "Art/Scences";
     public const int MsgSpan = 3000;
+    public const int TableSpan = 100;
 
 
 

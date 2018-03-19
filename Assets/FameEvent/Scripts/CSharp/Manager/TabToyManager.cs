@@ -5,17 +5,47 @@ using UnityEngine;
 
 public enum TabToyEvent
 {
-    TableTest = ManagerId.TabToyManager + 1,
+    TableTestBengain = ManagerId.TabToyManager + 1,
+    TableTestGetSample,
+    TableTestBackSample,
+    TableTestGetBlongs,
+    TableTestBackBlongs,
+    TableTestEnd = ManagerId.TabToyManager + FrameTools.TableSpan,
+
+    TableCharactorBengain = ManagerId.TabToyManager + FrameTools.TableSpan * 1 + 1,
+    TableCharactorGet,
+    TableCharactorBack,
+    TableCharactorEnd = ManagerId.TabToyManager + FrameTools.TableSpan * 2,
 }
 
 public class TabToyManager : ManagerBase
 {
 
     public static TabToyManager Instance = null;
+    private TableTestLoader tableTestLoader;
+    private TableCharactorLoader charactorLoader;
 
     private void Awake()
     {
         Instance = this;
+        InitTableLoaders();
+    }
+
+    private void InitTableLoaders()
+    {
+        if (tableTestLoader == null)
+        {
+            GameObject go = new GameObject("TableTestLoader");
+            go.AddComponent<TableTestLoader>();
+            go.transform.parent = transform;
+
+        }
+        if (charactorLoader == null)
+        {
+            GameObject go = new GameObject("TableCharactorLoader");
+            go.AddComponent<TableCharactorLoader>();
+            go.transform.parent = transform;
+        }
     }
 
     public void SendMsg(MsgBase msg)
@@ -30,34 +60,6 @@ public class TabToyManager : ManagerBase
         }
     }
 
-
-    private Dictionary<string, GameObject> sonMembers = new Dictionary<string, GameObject>();
-
-
-    public void RegistGameObject(string name, GameObject obj)
-    {
-        if (!sonMembers.ContainsKey(name))
-        {
-            sonMembers.Add(name, obj);
-        }
-    }
-
-    public void UnRegistGameObject(string name)
-    {
-        if (!sonMembers.ContainsKey(name))
-        {
-            sonMembers.Remove(name);
-        }
-    }
-
-    public GameObject GetGameObject(string name)
-    {
-        if (sonMembers.ContainsKey(name))
-        {
-            return sonMembers[name];
-        }
-        return null;
-    }
     // Use this for initialization
     void Start()
     {

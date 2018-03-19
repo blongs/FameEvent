@@ -133,6 +133,7 @@
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Manager\AssetBundleManager.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Manager\NetManager.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Manager\NPCManager.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\Manager\TabToyManager.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Manager\UIManager.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\ManagerBase.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\MonoBase.cs" />
@@ -151,8 +152,13 @@
     <Compile Include="Assets\FameEvent\Scripts\CSharp\Socket\TCPSocket.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\DataReader.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\Logger.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\TableCharactorLoader.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\TableTestLoader.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\TabScipts\Charactor.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\TabScipts\TableTest.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\TabToyBase.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\TabToyProgram.cs" />
+    <Compile Include="Assets\FameEvent\Scripts\CSharp\TabToy\TabToyTestPanel.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\ThirdSDK\ChannelSDK\AndroidChannelSDKMgr.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\ThirdSDK\ChannelSDK\AndroidMultSDKHelper.cs" />
     <Compile Include="Assets\FameEvent\Scripts\CSharp\ThirdSDK\ChannelSDK\AndroidSingleSDKHelper.cs" />

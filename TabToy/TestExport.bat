@@ -6,9 +6,6 @@ set CS_TARGET_PATH=..\.\Assets\FameEvent\Scripts\CSharp\TabToy\TabScipts\
 
 set CS_DATABIN_PATH=..\.\Assets\StreamingAssets\DataBin\
 
-rd /s /q %CS_TARGET_PATH%
-rd /s /q %CS_DATABIN_PATH%
-
 echo tabtoy.exe --mode=v2 --csharp_out=%CS_TARGET_PATH%TableTest.cs --binary_out=%CS_DATABIN_PATH%TableTest.bin --lan=zh_cn %SOURCE_FOLDER%Blongs.xlsx %SOURCE_FOLDER%Sample.xlsx
 
 @tabtoy.exe ^

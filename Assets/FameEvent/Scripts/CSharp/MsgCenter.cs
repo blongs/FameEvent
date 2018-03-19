@@ -14,11 +14,21 @@ public class MsgCenter : MonoBase {
     private void Awake()
     {
         Instance = this;
-        gameObject.AddComponent<UIManager>();
-        gameObject.AddComponent<NPCManager>();
-        gameObject.AddComponent<AssetBundleManager>();
-        gameObject.AddComponent<NetManager>();
-        gameObject.AddComponent<TabToyManager>();
+        GameObject go = new GameObject("UIManager");
+        go.AddComponent<UIManager>();
+        go.transform.parent = transform;
+        go = new GameObject("NPCManager");
+        go.AddComponent<NPCManager>();
+        go.transform.parent = transform;
+        go = new GameObject("AssetBundleManager");
+        go.AddComponent<AssetBundleManager>();
+        go.transform.parent = transform;
+        go = new GameObject("NetManager");
+        go.AddComponent<NetManager>();
+        go.transform.parent = transform;
+        go = new GameObject("TabToyManager");
+        go.AddComponent<TabToyManager>();
+        go.transform.parent = transform;
     }
     void Start ()
     {

@@ -67,9 +67,10 @@ public class JPushSDKHelper : MonoBehaviour {
     {
 #if UNITY_ANDROID
         return _SDKHelperPlugin.Call<string>("GetJPushId");
+#else
+        return ""
 #endif
-        return "";
     }
 
-    
+
 }

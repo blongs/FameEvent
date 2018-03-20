@@ -24,7 +24,6 @@ public class TabToyProgram : MonoBehaviour
 
     void Test()
     {
-        var dir = Directory.GetCurrentDirectory();
         using (var stream = new FileStream(Application.dataPath + "/StreamingAssets/DataBin/TableTest.bin", FileMode.Open))
         {
             stream.Position = 0;
@@ -47,7 +46,6 @@ public class TabToyProgram : MonoBehaviour
             config.TableLogger.AddTarget(new tabtoy.DebuggerTarget());
 
             // 取空时, 当默认值不为空时, 输出日志
-            var nullFetchOutLog = config.GetSampleByID(101).ToString();
             SampleDefine sampleDefine = config.GetSampleByID(101);
             Debug.Log("sampleDefine =" + sampleDefine.Name);
 

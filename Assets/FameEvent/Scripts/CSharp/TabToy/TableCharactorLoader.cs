@@ -46,7 +46,6 @@ public class TableCharactorLoader : TabToyBase
 
     void LoadBinData()
     {
-        var dir = Directory.GetCurrentDirectory();
         using (var stream = new FileStream(Application.dataPath + "/StreamingAssets/DataBin/Charactor.bin", FileMode.Open))
         {
             stream.Position = 0;

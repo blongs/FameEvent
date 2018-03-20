@@ -116,7 +116,7 @@ public class TimerManager : MonoBehaviour
                     }
                     else
                     {
-                        ti.resetCountDownTime = ti.resetCountDownTime = -realDalta;
+                        //ti.resetCountDownTime = ti.resetCountDownTime = -realDalta;
                     }
 
                     if (ti.resetCountDownTime <= 0)

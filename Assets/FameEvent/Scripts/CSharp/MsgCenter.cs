@@ -17,16 +17,22 @@ public class MsgCenter : MonoBase {
         GameObject go = new GameObject("UIManager");
         go.AddComponent<UIManager>();
         go.transform.parent = transform;
+
         go = new GameObject("NPCManager");
         go.AddComponent<NPCManager>();
+
         go.transform.parent = transform;
         go = new GameObject("AssetBundleManager");
+
         go.AddComponent<AssetBundleManager>();
         go.transform.parent = transform;
+
         go = new GameObject("NetManager");
         go.AddComponent<NetManager>();
+
         go.transform.parent = transform;
         go = new GameObject("TabToyManager");
+
         go.AddComponent<TabToyManager>();
         go.transform.parent = transform;
     }
@@ -34,6 +40,7 @@ public class MsgCenter : MonoBase {
     {
 		
 	}
+
 
     public override void ProcessEvent(MsgBase tmpMsg)
     {

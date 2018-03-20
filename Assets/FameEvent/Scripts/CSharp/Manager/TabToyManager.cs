@@ -35,16 +35,12 @@ public class TabToyManager : ManagerBase
     {
         if (tableTestLoader == null)
         {
-            GameObject go = new GameObject("TableTestLoader");
-            go.AddComponent<TableTestLoader>();
-            go.transform.parent = transform;
+            tableTestLoader = gameObject.AddComponent<TableTestLoader>();
 
         }
         if (charactorLoader == null)
         {
-            GameObject go = new GameObject("TableCharactorLoader");
-            go.AddComponent<TableCharactorLoader>();
-            go.transform.parent = transform;
+            charactorLoader = gameObject.AddComponent<TableCharactorLoader>();
         }
     }
 

@@ -510,7 +510,7 @@ public class AndroidSingleSDKHelper : ChannelSDKHelperBase
         }
         else
         {
-            url = "http://web.fu-5.xyz/nbf/index.php/login/check.html";
+           // url = "http://web.fu-5.xyz/nbf/index.php/login/check.html";
         }
         if (string.IsNullOrEmpty(url))
         {
@@ -612,8 +612,8 @@ public class AndroidSingleSDKHelper : ChannelSDKHelperBase
         var userinfoDic = respondDict["info"] as Dictionary<string, object>;
 
         //更新当前用户信息
-        //userInfo.UpdateData(userinfoDic);
-       // mCurrentUser = userInfo;
+        userInfo.UpdateData(userinfoDic);
+        mCurrentUser = userInfo;
 
         //调用代理
         finishCheckDelegate();
@@ -638,7 +638,7 @@ public class AndroidSingleSDKHelper : ChannelSDKHelperBase
         }
         else
         {
-            url = "http://web.fu-5.xyz/nbf/index.php/login/check.html";
+            //url = "http://web.fu-5.xyz/nbf/index.php/login/check.html";
         }
         if (string.IsNullOrEmpty(url))
         {

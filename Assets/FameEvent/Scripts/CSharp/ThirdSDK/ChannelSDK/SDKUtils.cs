@@ -126,7 +126,7 @@ public class SDKUtils : MonoBehaviour
     {
 #if UNITY_EDITOR
         TextEditor te = new TextEditor();
-        te.content = new GUIContent(text);
+        //te.content = new GUIContent(text);
         te.OnFocus();
         te.SelectAll();
         te.Copy();
@@ -198,15 +198,17 @@ public class SDKUtils : MonoBehaviour
     {
 #if UNITY_ANDROID
         return instance._AndroidPlugin.Call<string>("GetVersionInfo");
+#else
+        return ""
 #endif
-        return "";
     }
 
     public static string GetPackagerName()
     {
 #if UNITY_ANDROID
         return instance._AndroidPlugin.Call<string>("GetPackagerName");
+#else
+        return ""
 #endif
-        return "";
     }
 }

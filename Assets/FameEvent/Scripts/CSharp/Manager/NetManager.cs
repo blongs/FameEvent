@@ -5,10 +5,14 @@ using UnityEngine;
 public class NetManager : ManagerBase
 {
     public static NetManager Instance = null;
-
+    TCPSocket tCPSocket;
     private void Awake()
     {
         Instance = this;
+        if (tCPSocket == null)
+        {
+            tCPSocket =  gameObject.AddComponent<TCPSocket>();
+        }
     }
 
     public void SendMsg(MsgBase msg)

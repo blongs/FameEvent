@@ -285,7 +285,7 @@ public class NetSocket
         }
         catch (Exception e)
         {
-
+            Debug.LogError("e ="+e.StackTrace);
         }
     }
     #endregion

@@ -51,7 +51,6 @@ public class TableTestLoader : TabToyBase
 
     void LoadBinData()
     {
-        var dir = Directory.GetCurrentDirectory();
         using (var stream = new FileStream(Application.dataPath + "/StreamingAssets/DataBin/TableTest.bin", FileMode.Open))
         {
             stream.Position = 0;

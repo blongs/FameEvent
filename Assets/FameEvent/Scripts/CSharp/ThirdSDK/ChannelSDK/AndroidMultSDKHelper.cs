@@ -720,7 +720,7 @@ namespace OneSDK
             }
             else
             {
-                url = "http://web.fu-5.xyz/nbf/index.php/login/check.html";
+                //url = "http://web.fu-5.xyz/nbf/index.php/login/check.html";
             }
             if (string.IsNullOrEmpty(url))
             {

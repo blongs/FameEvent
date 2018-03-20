@@ -31,7 +31,6 @@ public class UnZipFiles
             {
                 ZipEntry zipEntry;
                 string unZipFileDiretory = "";
-                string[] splits = filePath.Split('/');
                 unZipFileDiretory = filePath.Replace(".zip","");
                 Debug.Log("unZipFileDiretory = " + unZipFileDiretory);
                 while ((zipEntry = s.GetNextEntry()) != null)

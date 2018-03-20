@@ -189,6 +189,7 @@ public class QuickPublishHelper
         }
         catch (Exception e)
         {
+            UnityEngine.Debug.LogError("e ="+ e.StackTrace);
 
         }
     }

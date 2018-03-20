@@ -31,7 +31,7 @@ public class RegisterPanel:UIBase
     private void RegisterBtnClick()
     {
        // Debug.unityLogger.Log("RegisterBtn Click");
-        MsgBase tmpBase = new MsgBase((ushort)UIEventAllen.Register);
+       // MsgBase tmpBase = new MsgBase((ushort)UIEventAllen.Register);
        // SendMsg(tmpBase);
     }
 

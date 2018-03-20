@@ -33,7 +33,7 @@ public class SocketState
         Debug.Log("strs= " + strs);
         */
         //返回值表示从客户端收到多少数据
-        int length = socket.EndReceive(ar);
+        //int length = socket.EndReceive(ar);
         short count = BitConverter.ToInt16(buffer, 0);
         /*
         Debug.Log("count = " + count);
@@ -57,6 +57,7 @@ public class SocketState
         IMessage IMLogin = new Login();
         Login login = new Login();
         login = (Login)IMLogin.Descriptor.Parser.ParseFrom(bodys);
+        Debug.Log("login = "+login.UserName);
         Array.Resize(ref buffer, count + 6);
         BegainSend(buffer);
 
@@ -108,7 +109,7 @@ public class Server : MonoBehaviour
             }
             catch (Exception e)
             {
-
+                Debug.LogError("e = "+e.StackTrace);
             }
             Thread.Sleep(1000);
         }

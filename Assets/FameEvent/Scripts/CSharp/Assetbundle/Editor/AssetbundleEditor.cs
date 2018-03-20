@@ -55,7 +55,7 @@ public class AssetbundleEditor
             }
             catch (Exception e)
             {
-                throw;
+                UnityEngine.Debug.LogError("e = "+e.StackTrace);
             }
         }
         else

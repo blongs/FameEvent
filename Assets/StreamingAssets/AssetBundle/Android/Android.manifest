@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1562843589
+CRC: 2734787125
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -10,4 +10,19 @@ AssetBundleManifest:
       Dependencies: {}
     Info_2:
       Name: scenceone/prefabsbig.ld
+      Dependencies: {}
+    Info_3:
+      Name: scencecowboy/materials.ld
+      Dependencies:
+        Dependency_0: scencecowboy/textures.ld
+    Info_4:
+      Name: scencecowboy/model.ld
+      Dependencies: {}
+    Info_5:
+      Name: scencecowboy/prefabs.ld
+      Dependencies:
+        Dependency_0: scencecowboy/materials.ld
+        Dependency_1: scencecowboy/model.ld
+    Info_6:
+      Name: scencecowboy/textures.ld
       Dependencies: {}

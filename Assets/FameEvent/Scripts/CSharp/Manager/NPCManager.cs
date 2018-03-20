@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+public enum NPCEvent
+{
+    NPCBengain = ManagerId.NPCManager + 1,
+    CowboyAttack,
+    ZWalkAttack,
+}
+
+
+
 public class NPCManager : ManagerBase
 {
 

@@ -39,8 +39,6 @@ public class IABScenceManager
         {
             string tmpStr = br.ReadLine();
             string[] temArr = tmpStr.Split("".ToCharArray());
-            Debug.LogError("temArr[0] = " + temArr[0]);
-            Debug.LogError("temArr[1] = " + temArr[1]);
             allAsset.Add(temArr[0], temArr[1]);
         }
         br.Close();
@@ -74,7 +72,7 @@ public class IABScenceManager
         }
         else
         {
-            Debug.LogError("");
+            Debug.LogError("没有"+ bundleName+"的资源");
         }
     }
 

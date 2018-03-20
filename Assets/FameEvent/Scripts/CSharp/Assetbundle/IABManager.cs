@@ -19,8 +19,11 @@ public class AssetResObj
     {
         for (int i = 0; i < objs.Count; i++)
         {
-            // Resources.UnloadAsset(objs[i]);
+#if USE_ASSETBUNDLE
+            Resources.UnloadAsset(objs[i]);
+#else
             GameObject.Destroy(objs[i]);
+#endif
         }
     }
 }
@@ -257,7 +260,7 @@ public class IABManager
         loader.LoadAssetBundleFromFile();
     }
 
-    #region 由下层提供API
+#region 由下层提供API
     public void DebugAssetBundle(string bundleName)
     {
         if (loadHelper.ContainsKey(bundleName))
@@ -358,6 +361,6 @@ public class IABManager
             return null;
         }
     }
-    #endregion
+#endregion
 
 }

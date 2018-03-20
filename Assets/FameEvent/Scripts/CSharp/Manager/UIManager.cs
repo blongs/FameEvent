@@ -10,6 +10,11 @@ public class UIManager : ManagerBase {
 
     public static UIManager Instance = null;
 
+    void Awake()
+    {
+        Debug.Log("---UIManager--- Awake");
+        Instance = this;
+    }
 
     public void SendMsg(MsgBase msg)
     {

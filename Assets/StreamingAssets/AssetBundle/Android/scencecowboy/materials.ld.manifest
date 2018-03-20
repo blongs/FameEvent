@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 3266303042
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fc8f01aed33a4135a7390ca2e30f2fa1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8d068741ae817c9b5c92580f37de87e3
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Art/Scences/ScenceCowboy/Materials/Cowboy Unlit.mat
+- Assets/Resources/Art/Scences/ScenceCowboy/Materials/Cowboy.mat
+Dependencies:
+- E:/Learn/FramEventProject/Assets/StreamingAssets/AssetBundle/Android/scencecowboy/textures.ld

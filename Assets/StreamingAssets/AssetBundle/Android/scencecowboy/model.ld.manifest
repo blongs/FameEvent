@@ -1,0 +1,31 @@
+ManifestFileVersion: 0
+CRC: 1401799340
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 05acd3101cb83c9022154723dcdf567a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 39a8f9701cd4b54adcd5094a121abae9
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Art/Scences/ScenceCowboy/Model/Cowboy 1.0.FBX
+- Assets/Resources/Art/Scences/ScenceCowboy/Model/Cowboy 1.1.FBX
+Dependencies: []

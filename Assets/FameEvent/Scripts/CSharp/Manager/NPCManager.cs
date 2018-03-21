@@ -7,8 +7,9 @@ using UnityEngine;
 public enum NPCEvent
 {
     NPCBengain = ManagerId.NPCManager + 1,
-    CowboyAttack,
-    ZWalkAttack,
+    Attack,
+    Idle,
+    Run,
 }
 
 

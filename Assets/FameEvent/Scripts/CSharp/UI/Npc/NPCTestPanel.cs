@@ -27,10 +27,31 @@ public class NPCTestPanel : UIBase
 
     }
 
+    bool run = false;
+
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        {
+            if (run == false)
+            {
+                run = true;
+                MsgBase msg = new MsgBase((ushort)NPCEvent.Run);
+                SendMsg(msg);
 
+            }
+          
+        }
+        else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
+        {
+            if (run == true)
+            {
+                run = false;
+                MsgBase msg = new MsgBase((ushort)NPCEvent.Idle);
+                SendMsg(msg);
+            }
+        }
     }
 
     void AssetBundleButtonClick()
@@ -38,26 +59,28 @@ public class NPCTestPanel : UIBase
 #if USE_ASSETBUNDLE
         StartCoroutine(IABManifestLoader.Instance.LoadManifest());
 #endif
-        HankAssetResource msg = new HankAssetResource(true, (ushort)AssetEvent.HankResource, "scencecowboy", "Prefabs", "Cowboy", (ushort)UIEventAllen.Login);
+        HankAssetResource msg = new HankAssetResource(true, (ushort)AssetEvent.HankResource, "scenceactor", "Prefabs", "Mesh", (ushort)UIEventAllen.Login);
         SendMsg(msg);
     }
 
 
     void ReleaseButtonClick()
     {
-        HankAssetResource msg = new HankAssetResource(true, (ushort)AssetEvent.ReleaseSingleObj, "scencecowboy", "Prefabs", "Cowboy", (ushort)UIEventAllen.Load);
+        HankAssetResource msg = new HankAssetResource(true, (ushort)AssetEvent.ReleaseSingleObj, "scenceactor", "Prefabs", "Mesh", (ushort)UIEventAllen.Load);
         SendMsg(msg);
     }
 
     void DownLoadAssetBundleButtonClick()
     {
-        string path = "http://192.168.13.107/Resourses/" + IPathTools.GetPlatformFolderName() + ".zip";
-        UpdateHelper.Instance.DownResource(path, null);
+        // string path = "http://192.168.13.107/Resourses/" + IPathTools.GetPlatformFolderName() + ".zip";
+        // UpdateHelper.Instance.DownResource(path, null);
+        HankAssetResource msg = new HankAssetResource(true, (ushort)AssetEvent.HankResource, "scenceactor", "Prefabs", "difu", (ushort)UIEventAllen.Login);
+        SendMsg(msg);
     }
 
     void CowboyAttackButtonClick()
     {
-        MsgBase msg = new MsgBase((ushort)NPCEvent.ZWalkAttack);
+        MsgBase msg = new MsgBase((ushort)NPCEvent.Attack);
         SendMsg(msg);
     }
 

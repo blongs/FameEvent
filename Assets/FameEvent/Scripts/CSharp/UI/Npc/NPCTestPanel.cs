@@ -13,7 +13,7 @@ public class NPCTestPanel : UIBase
 (ushort)UIEventAllen.Login,
 (ushort)UIEventAllen.Load,
         };
-        RegistSelf(this,msgIds);
+        RegistSelf(this, msgIds);
     }
     // Use this for initialization
     void Start()
@@ -32,7 +32,7 @@ public class NPCTestPanel : UIBase
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
         {
             if (run == false)
             {
@@ -41,9 +41,9 @@ public class NPCTestPanel : UIBase
                 SendMsg(msg);
 
             }
-          
+
         }
-        else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
+        else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
         {
             if (run == true)
             {
@@ -85,7 +85,7 @@ public class NPCTestPanel : UIBase
     }
 
 
-    
+
 
     public override void ProcessEvent(MsgBase tmpMsg)
     {
@@ -97,7 +97,7 @@ public class NPCTestPanel : UIBase
                 Instantiate(temp.value[0]);
                 break;
             case (ushort)UIEventAllen.Load:
-               
+
                 Debug.Log("Release");
                 break;
         }
